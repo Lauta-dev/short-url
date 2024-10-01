@@ -1,16 +1,19 @@
 import express from "express";
 import getUrlById from "./getUrlById.js";
 import PushUrls from "./PushUrl.js";
+import cors from "cors";
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 app.post("/url/", async (req, res) => {
 	/** @type {string} */
 	const url = req.body.url;
+	console.log(req.body);
 
 	if (!url.startsWith("https://")) {
 		return res.status(400).json({
