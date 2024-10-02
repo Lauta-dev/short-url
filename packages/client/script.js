@@ -1,6 +1,8 @@
 const box = document.querySelector(".output");
-const input = document.querySelector("form");
+const form = document.querySelector("form");
 const loading = document.getElementById("loading");
+
+console.log(form);
 
 /** @type {HTMLButtonElement} */
 const buttonCopy = document.querySelector(".output_button_hide");
@@ -31,7 +33,7 @@ async function fetchUrl(url) {
 	return json;
 }
 
-input.addEventListener("submit", async (event) => {
+form.addEventListener("submit", async (event) => {
 	event.preventDefault();
 	const { url } = Object.fromEntries(new FormData(event.target));
 

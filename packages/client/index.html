@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Short URL</title>
     <link href="style.css" rel="stylesheet">
     <link href="loader.css" rel="stylesheet">
-    <script async src="script.js"></script>
+    <script type="module" src="script.js"></script>
   </head>
   <body>
-    <h1>Short URL</h1>
+    <h1>Acortador de URL</h1>
 
     <form>
-      <label for="url">Add your URL</label>
+      <label for="url">Escriba la URL</label>
 
       <div>
         <input
@@ -22,12 +22,12 @@
           placeholder="https://example.com"
           autocomplete="off"
         />
-        <button type="submit">Get short URL</button>
+        <button type="submit">Obtener la URL acortada</button>
       </div>
     </form>
 
     <div>
-      <h3 id="loading" class="loading">Loading <div class="loader"></div></h3>
+      <h3 id="loading" class="loading">Cargando <div class="loader"></div></h3>
     </div>
 
     <div class="output_container">
