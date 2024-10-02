@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Short URL</title>
     <link href="style.css" rel="stylesheet">
+    <link href="loader.css" rel="stylesheet">
     <script async src="script.js"></script>
   </head>
   <body>
@@ -14,15 +15,28 @@
       <label for="url">Add your URL</label>
 
       <div>
-        <input type="text" name="url" id="url" placeholder="https://example.com" />
+        <input
+          type="text"
+          name="url"
+          id="url"
+          placeholder="https://example.com"
+          autocomplete="off"
+        />
         <button type="submit">Get short URL</button>
       </div>
     </form>
 
-    <h3 id="loading">Cargando</h3>
+    <div>
+      <h3 id="loading" class="loading">Loading <div class="loader"></div></h3>
+    </div>
 
-    <div class="app">
+    <div class="output_container">
+      <div>
+        <b class="output">https</b>
+        <button class="output_button output_button_hide">Copiar URL</button>
+      </div>
 
+      <p class="successMessage copy_disable" >Copiado al portapapeles!</p>
     </div>
 
   </body>
