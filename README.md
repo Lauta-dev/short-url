@@ -14,6 +14,8 @@ Short URL es un acortador de enlaces simple y eficiente, construido con JavaScri
 - **CSS**
 - **HTML**
 - **Vercel** para el despliegue
+- **Turso.tech** para el uso de la base de datos
+- **SQLite**
 
 ## Instalación
 
