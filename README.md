@@ -1,4 +1,4 @@
-![screenshort](./packages/client/public/shorturlscreen.png)
+![screenshort](./packages/client/shorturlscreen.png)
 
 # Short URL
 
