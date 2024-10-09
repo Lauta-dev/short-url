@@ -1,3 +1,5 @@
+![screenshort](./packages/client/public/shorturlscreen.png)
+
 # Short URL
 
 Short URL es un acortador de enlaces simple y eficiente, construido con JavaScript y CSS. Permite acortar URLs largas para facilitar su uso y compartirlas.
@@ -25,7 +27,7 @@ git clone https://github.com/lauta-dev/short-url.git
 ```
 
 2. Instalar depenencias
-```bash 
+```bash
 cd packages/server
 pnpm i
 ```
@@ -33,13 +35,13 @@ pnpm i
 3. Iniciar proyectos
 > Para levantar un servidor web uso [live-server](https://www.npmjs.com/package/live-server)
 
-```bash 
+```bash
 cd packages/client
 live-server
 ```
 > Levanta en: http://localhost:8080
 
-```bash 
+```bash
 cd packages/server
 pnpm start dev
 ```
