@@ -1,21 +1,21 @@
-const box = document.querySelector(".output");
+const box = document.querySelector("#shortUrl");
 const form = document.querySelector("form");
-const loading = document.getElementById("loading");
+const loading = document.querySelector(".loading-container");
 
-console.log(form);
+const resultDiv = document.querySelector("#result");
 
 /** @type {HTMLButtonElement} */
-const buttonCopy = document.querySelector(".output_button_hide");
+const buttonCopy = document.querySelector("#copyBtn");
 
-/**
- * @type {HTMLParagraphElement}  // Describe el tipo de elemento
- * @description Elemento de párrafo que muestra un mensaje de éxito en la interfaz.
- */
-const successMessage = document.querySelector(".successMessage");
+/** @type {HTMLParagraphElement} */
+const shortUrlContent = document.querySelector("#shortUrl");
+
+/** @type {HTMLDivElement}*/
+const successMessage = document.querySelector("#successMessage");
 
 /** @param {string} url */
 async function fetchUrl(url) {
-	loading.style.display = "flex"; // Para mostrar un loading al enviar la petición
+	loading.classList.remove("hidden"); // Para mostrar un loading al enviar la petición
 
 	const res = await fetch("https://short-url-ebon-six.vercel.app/url", {
 		method: "POST",
@@ -28,7 +28,7 @@ async function fetchUrl(url) {
 
 	const json = await res.json();
 
-	loading.style.display = "none"; // Vuelve a su esta inicial
+	loading.classList.add("hidden"); // Para mostrar un loading al enviar la petición
 
 	return json;
 }
@@ -42,25 +42,17 @@ form.addEventListener("submit", async (event) => {
 	box.textContent = data.short;
 
 	// Set output style
-	box.classList.remove("output");
-	box.classList.add("output_success");
-
-	// Set button style
-	buttonCopy.classList.remove("output_button_hide");
-	buttonCopy.classList.add("output_button");
+	resultDiv.classList.remove("hidden");
 });
 
 // Copiar URL al portapapeles
 
 function copyTextToClipboard() {
 	const content = box.textContent;
-
-	successMessage.classList.remove("copy_disable");
-	successMessage.classList.add("copy_success");
+	successMessage.classList.remove("hidden");
 
 	setTimeout(() => {
-		successMessage.classList.remove("copy_success");
-		successMessage.classList.add("copy_disable");
+		successMessage.classList.add("hidden");
 	}, 5000);
 
 	navigator.clipboard.writeText(content);

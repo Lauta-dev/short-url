@@ -4,40 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Short URL</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="shadnc-style.css" rel="stylesheet">
     <link href="loader.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <script type="module" src="script.js"></script>
   </head>
   <body>
-    <h1>Acortador de URL</h1>
+    <main class="container">
+      <h1>Acortador de URL</h1>
 
-    <form>
-      <label for="url">Escriba la URL</label>
+      <form>
+        <div class="form-group">
+          <label for="longUrl">Enter your long URL</label>
+          <input
+            type="url"
+            name="url"
+            id="url"
+            placeholder="https://example.com"
+            autocomplete="off"
+            required
+          />
+        </div>
+        <button type="submit">Short</button>
+      </form>
 
-      <div>
-        <input
-          type="text"
-          name="url"
-          id="url"
-          placeholder="https://example.com"
-          autocomplete="off"
-        />
-        <button type="submit">Obtener la URL acortada</button>
-      </div>
-    </form>
-
-    <div>
-      <h3 id="loading" class="loading">Cargando <div class="loader"></div></h3>
-    </div>
-
-    <div class="output_container">
-      <div>
-        <b class="output">https</b>
-        <button class="output_button output_button_hide">Copiar URL</button>
+      <div class="hidden loading-container">
+        <h3 class="loading">Cargando <div class="loader"></div></h3>
       </div>
 
-      <p class="successMessage copy_disable" >Copiado al portapapeles!</p>
-    </div>
+      <div id="result" class="hidden">
+        <hr>
+        <div class="output-container">
+          <p id="shortUrl" style="cursor: copy;">https://algo.com</p>
+          <button id="copyBtn">Copiar</button>
+        </div>
+      </div>
+      <div id="successMessage" class="hidden">URL copiada con éxito</div>
+    </main>
 
   </body>
 </html>
