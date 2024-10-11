@@ -17,7 +17,9 @@ const successMessage = document.querySelector("#successMessage");
 async function fetchUrl(url) {
 	loading.classList.remove("hidden"); // Para mostrar un loading al enviar la petición
 
-	const res = await fetch("https://short-url-ebon-six.vercel.app/url", {
+	// prod:https://short-url-ebon-six.vercel.app/url
+
+	const res = await fetch("http://localhost:3000/url", {
 		method: "POST",
 		body: JSON.stringify({ url }),
 		headers: {
