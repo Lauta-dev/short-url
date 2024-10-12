@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // - Middleware
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(limiter);
 
 // - routers
