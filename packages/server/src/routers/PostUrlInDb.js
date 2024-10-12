@@ -33,11 +33,11 @@ postUrlInBb.post("/url", async (req, res) => {
 	const uuid = crypto.randomUUID().split("-")[0];
 	const short = `${req.hostname}/short/${uuid}`;
 
-	/*await PushUrls({
+	await PushUrls({
 		url,
 		id: uuid,
 		short,
-	});*/
+	});
 
 	res.json({ short });
 });
