@@ -28,8 +28,6 @@ async function scanUrl(url) {
 		/** @type {ScanUrl} */
 		const { data } = await response.json();
 
-		console.log({ data });
-
 		return {
 			result: data,
 			code: response.status,
@@ -52,8 +50,6 @@ async function getReported(url) {
 		}
 
 		const reportedUrl = scanUrla.result.links.self;
-
-		console.log(reportedUrl);
 
 		let response = await fetch(reportedUrl, {
 			headers: { accept: "application/json", "x-apikey": apiKey },
@@ -120,7 +116,6 @@ async function getReported(url) {
 			"es-AR",
 			options,
 		);
-		console.log(reportStatus);
 
 		return {
 			code: 200,
