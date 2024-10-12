@@ -31,7 +31,7 @@ postUrlInBb.post("/url", async (req, res) => {
 	console.log(virusTotalReport);
 
 	const uuid = crypto.randomUUID().split("-")[0];
-	const short = `${req.hostname}/short/${uuid}`;
+	const short = `${req.hostname}/${uuid}`;
 
 	await PushUrls({
 		url,
