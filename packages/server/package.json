@@ -17,6 +17,7 @@
 		"express-rate-limit": "^7.4.1"
 	},
 	"devDependencies": {
+		"@biomejs/biome": "1.9.3",
 		"@types/cors": "^2.8.17",
 		"@types/express": "^5.0.0"
 	}
