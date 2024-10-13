@@ -55,18 +55,18 @@
   </dialog>
 
   <!-- Reporte de VirusTotal -->
-  <dialog close>
+  <dialog close id="vt-report-modal">
     <article>
       <h2>Reporte por virusTotal</h2>
       <table>
         <tbody>
           <tr>
             <th scope="row">Estado del reporte</th>
-            <th>Complete</th>
+            <th id="report-state-value"></th>
           </tr>
           <tr>
             <th scope="row">Fecha del reporte</th>
-            <th>10/10/2012, 12:20</th>
+            <th id="report-date-value"></th>
           </tr>
 
         </tbody>
@@ -76,9 +76,11 @@
 
       <!-- malicioso -->
       <details>
-        <summary class="pico-background-red-500" style="border: none;" role="button">Malicioso <b id="mal-count"></b>
+        <summary class="pico-background-red-500" style="border: none;" role="button">
+          Malicioso
+          <b id="malicious-count"></b>
         </summary>
-        <ul></ul>
+        <ul class="engine malicious"></ul>
       </details>
 
       <!-- sospechoso -->
@@ -86,31 +88,30 @@
       <details>
         <summary class="pico-background-yellow-500" style="border: none;" role="button">
           Sospechoso
-          <b id="sos-count"></b>
+          <b id="suspicious-count"></b>
         </summary>
-        <ul></ul>
+        <ul class="engine suspicious"></ul>
       </details>
 
       <!-- no detectado -->
       <details>
         <summary class="pico-background-grey-500" style="border: none;" role="button">
           No Detectado
-          <b id="nod-count"></b>
+          <b id="undetected-count"></b>
         </summary>
-        <ul></ul>
+        <ul class="engine undetected"></ul>
       </details>
 
       <!-- inofencivo -->
       <details>
         <summary class="pico-background-grey-950" style="border: none;" role="button">
           Inofencivo
-          <b id="ino-count"></b>
-
+          <b id="harmless-count"></b>
         </summary>
-        <ul></ul>
+        <ul class="engine harmless"></ul>
       </details>
       <footer>
-        <button>Continuar</button>
+        <button id="close-report-modal">Cerrar</button>
       </footer>
     </article>
   </dialog>
@@ -176,7 +177,7 @@
 
     </form>
 
-    <footer id="result hidden">
+    <footer id="result" class="hidden">
       <div class="output-container">
         <code id="shortUrl" style="cursor: copy;">https://example.com</code>
         <button id="copyBtn" class="secondary">Copiar</button>

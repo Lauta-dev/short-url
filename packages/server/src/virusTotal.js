@@ -117,8 +117,8 @@ async function getReported(url) {
 			options,
 		);
 
-		return {
-			code: 200,
+		const returnCode = (code) => ({
+			code: code,
 			results: {
 				date: formatedUnixDate,
 				reportStatus,
@@ -139,7 +139,9 @@ async function getReported(url) {
 					stats: attributes.stats.malicious,
 				},
 			},
-		};
+		});
+
+		return malicious.length > 0 ? returnCode(403) : returnCode(200);
 	} catch (error) {
 		return {
 			code: 500,

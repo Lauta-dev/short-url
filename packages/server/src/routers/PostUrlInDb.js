@@ -39,7 +39,7 @@ postUrlInBb.post("/url", async (req, res) => {
 		short,
 	});
 
-	res.json({ short });
+	res.status(virusTotalReport.code).json({ ...virusTotalReport, short });
 });
 
 export default postUrlInBb;

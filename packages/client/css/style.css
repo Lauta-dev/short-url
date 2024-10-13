@@ -2,13 +2,17 @@ li {
   list-style: none !important;
 }
 
-
-/*
-*
-   
+.open-report-modal {
+  cursor: pointer;
+  color: #777777;
+  transition: color 0.5s ease-out allow-discrete;
 }
-*
-* */
+
+.open-report-modal:hover {
+  transition: color 0.5s ease-out allow-discrete;
+  color: #000000;
+}
+
 header {
   display: flex;
   justify-content: space-between;

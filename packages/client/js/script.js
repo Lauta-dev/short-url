@@ -1,16 +1,10 @@
-const box = document.querySelector("#shortUrl");
+let box, buttonCopy, successMessage;
 const form = document.querySelector("form");
 
 const resultDiv = document.querySelector("#result");
 
-/** @type {HTMLButtonElement} */
-const buttonCopy = document.querySelector("#copyBtn");
-
 /** @type {HTMLParagraphElement} */
 const shortUrlContent = document.querySelector("#shortUrl");
-
-/** @type {HTMLDivElement}*/
-const successMessage = document.querySelector("#successMessage");
 
 const inputUrl = document.getElementById("url");
 
@@ -20,6 +14,45 @@ const btnPostUrl = document.getElementById("btn-post-url");
 /** @type {HTMLButtonElement}*/
 const btnOpenMenuMb = document.getElementById("btn-open-menu-mb");
 
+/** @type {HTMLDivElement}*/
+const outputContainer = document.querySelector(".output-container");
+
+/** @type {HTMLDialogElement}*/
+const vtReportModal = document.querySelector("#vt-report-modal");
+
+/** @type {HTMLButtonElement}*/
+const vtCloseReportModal = document.querySelector("#close-report-modal");
+
+/** @param {ScanResults} report */
+function generateReportModal(report) {
+	/** @type {HTMLUListElement[]}*/
+	const enginesContainer = document.querySelectorAll(".engine");
+
+	// NOTE: por alguna razón puede dar undefined
+	const { results } = report;
+
+	// TODO: Hacer mejor uso de los errores
+	if (!results) {
+		return 0;
+	}
+
+	const { date, reportStatus } = results;
+
+	enginesContainer.forEach((data) => {
+		// Se obtiene el nombre de las categorias
+		const categories = data.className.split(" ")[1];
+		const { engineName, stats } = results[categories];
+		document.getElementById(`${categories}-count`).textContent = stats;
+
+		engineName.forEach((d) => {
+			data.innerHTML += `<li>${d}</li>`;
+		});
+	});
+
+	document.getElementById("report-state-value").textContent = reportStatus;
+	document.getElementById("report-date-value").textContent = date;
+}
+
 /** @param {string} url */
 async function fetchUrl(url) {
 	btnPostUrl.textContent = "Generando URL espere...";
@@ -28,7 +61,7 @@ async function fetchUrl(url) {
 
 	// prod:https://short-url-ebon-six.vercel.app/url
 
-	const res = await fetch("https://short-url-ebon-six.vercel.app/url", {
+	const res = await fetch("http://localhost:3000/url", {
 		method: "POST",
 		body: JSON.stringify({ url }),
 		headers: {
@@ -37,6 +70,7 @@ async function fetchUrl(url) {
 		},
 	});
 
+	/** @type {ScanResults} */
 	const json = await res.json();
 
 	btnPostUrl.textContent = "Acortar";
@@ -52,10 +86,42 @@ form.addEventListener("submit", async (event) => {
 
 	let data = await fetchUrl(url);
 
-	box.textContent = data.short;
+	if (data.code !== 200) {
+		generateReportModal(data);
+		resultDiv.classList.remove("hidden");
+		const outputContainer = document.querySelector(".output-container");
+		outputContainer.innerHTML = `<p class="pico-color-red-500">
+      El Link se reporto como malicioso, <b class="open-report-modal">Pulse aqui para ver el reporte</b>.
+    </p>`;
 
-	// Set output style
-	resultDiv.classList.remove("hidden");
+		outputContainer.addEventListener(
+			"click",
+			() => (vtReportModal.open = true),
+		);
+
+		vtCloseReportModal.addEventListener("click", () => {
+			vtReportModal.open = false;
+		});
+
+		return 0;
+	}
+
+	document.getElementById("result").classList.remove("hidden");
+	document.getElementById("result").innerHTML = `
+  <div>
+    <code id="shortUrl" style="cursor: pointer;">${data.short}</code>
+    <button id="copyBtn">Copiar</button>
+  </div>
+
+  <b id="successMessage" class="pico-color-green-400 hidden">URL copiada con éxito</b>
+  `;
+
+	box = document.querySelector("#shortUrl");
+	buttonCopy = document.querySelector("#copyBtn");
+	box.addEventListener("click", () => copyTextToClipboard());
+	buttonCopy.addEventListener("click", () => copyTextToClipboard());
+
+	successMessage = document.querySelector("#successMessage");
 });
 
 // Copiar URL al portapapeles
@@ -70,9 +136,6 @@ function copyTextToClipboard() {
 
 	navigator.clipboard.writeText(content);
 }
-
-box.addEventListener("click", () => copyTextToClipboard());
-buttonCopy.addEventListener("click", () => copyTextToClipboard());
 
 // # Input event
 inputUrl.addEventListener("keyup", (event) => {
