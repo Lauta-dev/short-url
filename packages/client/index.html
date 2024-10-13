@@ -29,37 +29,160 @@
     content="https://opengraph.b-cdn.net/production/images/98e9f2a1-b2ca-4827-a1b3-48b57d5c37d0.png?token=M3MvkkDLi6odJNAPyidX_B3THEif_DAavLBINZAa4YU&height=651&width=1200&expires=33264503288">
 
   <!-- Meta Tags Generated via https://www.opengraph.xyz -->
-  <link href="pico.min.css" rel="stylesheet">
-  <link href="loader.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
-  <script type="module" src="script.js"></script>
+  <link href="css/pico.min.css" rel="stylesheet">
+  <link href="css/pico.colors.min.css" rel="stylesheet">
+  <link href="css/loader.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/modal.js"></script>
 </head>
 
 <body>
+  <!-- Uso del servico -->
+  <dialog close id="modal-status">
+    <article>
+      <h2>Condiciones de servicio</h2>
+      <ul>
+        <li>Las URL deben empezar con: <b>https</b>.</li>
+        <li>No se debe usar para fin malicioso.</li>
+        <li>Las URL deben ser seguras.</li>
+        <li>No generar URL por bots.</li>
+      </ul>
+      <footer>
+        <button data-target="modal-status" class="btn-close-modal outline">Cerrar</button>
+      </footer>
+    </article>
+  </dialog>
+
+  <!-- Reporte de VirusTotal -->
+  <dialog close>
+    <article>
+      <h2>Reporte por virusTotal</h2>
+      <table>
+        <tbody>
+          <tr>
+            <th scope="row">Estado del reporte</th>
+            <th>Complete</th>
+          </tr>
+          <tr>
+            <th scope="row">Fecha del reporte</th>
+            <th>10/10/2012, 12:20</th>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <h3>Estos antivirus saltaron</h3>
+
+      <!-- malicioso -->
+      <details>
+        <summary class="pico-background-red-500" style="border: none;" role="button">Malicioso <b id="mal-count"></b>
+        </summary>
+        <ul></ul>
+      </details>
+
+      <!-- sospechoso -->
+
+      <details>
+        <summary class="pico-background-yellow-500" style="border: none;" role="button">
+          Sospechoso
+          <b id="sos-count"></b>
+        </summary>
+        <ul></ul>
+      </details>
+
+      <!-- no detectado -->
+      <details>
+        <summary class="pico-background-grey-500" style="border: none;" role="button">
+          No Detectado
+          <b id="nod-count"></b>
+        </summary>
+        <ul></ul>
+      </details>
+
+      <!-- inofencivo -->
+      <details>
+        <summary class="pico-background-grey-950" style="border: none;" role="button">
+          Inofencivo
+          <b id="ino-count"></b>
+
+        </summary>
+        <ul></ul>
+      </details>
+      <footer>
+        <button>Continuar</button>
+      </footer>
+    </article>
+  </dialog>
+
+  <header class="container">
+    <nav class="nav-desktop container-fluid">
+      <ul>
+        <li><strong>Acortador de URL</strong></li>
+      </ul>
+      <ul>
+        <li>
+          <a href="#" class="contrast">GitHub</a>
+        </li>
+        <li>
+          <a href="#" class="contrast">LinkedIn</a>
+        </li>
+        <!-- TODO: Abrir modal para mostrar información -->
+        <li>
+          <button class="secondary btn-open-modal" data-target="modal-status">
+            Codiciones de servicio
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <nav class="container burger-menu">
+      <ul>
+        <li>
+          <strong>Acortador de URL</strong>
+        </li>
+      </ul>
+      <ul>
+        <li>
+          <button type="button" id="btn-open-menu-mb" class="outline">Menú</button>
+        </li>
+      </ul>
+    </nav>
+
+    <aside class="nav-mb" id="nav-mb">
+      <nav>
+        <ul>
+          <li><a href="#" class="contrast">GitHub</a></li>
+          <li><a href="#" class="contrast">LinkedIn</a></li>
+          <li>
+            <button class="secondary btn-open-modal-mb" data-target="modal-status">
+              Codiciones de servicio
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+  </header>
+
   <main class="container">
-    <h1>Acortador de URL</h1>
 
     <form>
-      <div class="form-group">
-        <label for="longUrl">Enter your long URL</label>
-        <input type="url" name="url" id="url" placeholder="https://example.com" autocomplete="off" required />
-      </div>
-      <button type="submit">Short</button>
+      <fieldset>
+        <input ype="url" name="url" id="url" placeholder="Pegue su URL" autocomplete="off" required />
+        <small class="valid-invalid-helper"></small>
+        <button type="submit" id="btn-post-url" disabled>Acortar</button>
+      </fieldset>
+
     </form>
 
-    <div class="hidden loading-container">
-      <h3 class="loading">Cargando <div class="loader"></div>
-      </h3>
-    </div>
-
-    <div id="result" class="hidden">
-      <hr>
+    <footer id="result hidden">
       <div class="output-container">
-        <p id="shortUrl" style="cursor: copy;">https://algo.com</p>
-        <button id="copyBtn">Copiar</button>
+        <code id="shortUrl" style="cursor: copy;">https://example.com</code>
+        <button id="copyBtn" class="secondary">Copiar</button>
       </div>
-    </div>
-    <div id="successMessage" class="hidden">URL copiada con éxito</div>
+      <div id="successMessage" class="hidden">URL copiada con éxito</div>
+    </footer>
   </main>
 
 </body>
