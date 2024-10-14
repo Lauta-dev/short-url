@@ -61,7 +61,7 @@ async function fetchUrl(url) {
 
 	// prod:https://short-url-ebon-six.vercel.app/url
 
-	const res = await fetch("http://localhost:3000/url", {
+	const res = await fetch("https://short-url-ebon-six.vercel.app/url", {
 		method: "POST",
 		body: JSON.stringify({ url }),
 		headers: {
