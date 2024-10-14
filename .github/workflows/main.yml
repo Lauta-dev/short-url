@@ -2,7 +2,8 @@ name: as
 
 
 on:
-  - push
+  schedule:
+    - cron: "1 * * * *"
 
 jobs:
   cron:
