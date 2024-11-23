@@ -22,13 +22,12 @@ postUrlInBb.post("/url", async (req, res) => {
 		});
 	}
 
-	const virusTotalReport = await getReported(url);
+	// TODO: mejorar el checkeo por VT
+	/*const virusTotalReport = await getReported(url);
 
 	if (virusTotalReport.code !== 200) {
 		return res.status(virusTotalReport.code).json(virusTotalReport);
-	}
-
-	console.log(virusTotalReport);
+	}*/
 
 	const uuid = crypto.randomUUID().split("-")[0];
 	const short = `${req.hostname}/${uuid}`;
@@ -39,7 +38,7 @@ postUrlInBb.post("/url", async (req, res) => {
 		short,
 	});
 
-	res.status(virusTotalReport.code).json({ ...virusTotalReport, short });
+	res.status(200).json({ short });
 });
 
 export default postUrlInBb;
