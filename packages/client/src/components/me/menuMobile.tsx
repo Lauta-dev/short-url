@@ -7,10 +7,9 @@ import {
 	MenubarSeparator,
 } from "@/components/ui/menubar";
 
-function MenuMobile() {
+function MenuMobile({ divClassName }) {
 	return (
-		<div className="flex justify-between">
-			<h2>Generador de URL</h2>
+		<div className={divClassName}>
 			<Menubar>
 				<MenubarMenu>
 					<MenubarTrigger>Menú</MenubarTrigger>
