@@ -1,24 +1,24 @@
+import MenuMobile from "@/components/me/menuMobile";
+
 function Header() {
-	// TODO: Sacar a un archivo aparte
 	const links = [
-		{ site: "GitHub", link: "https://lauta-dev/" },
+		{ site: "GitHub", link: "https://github.com/lauta-dev/" },
 		{ site: "Linkedin", link: "#" },
 	];
 
 	return (
-		<header className="pb-4 pt-4">
-			<nav className="flex justify-between items-center">
-				<h2>Acortador de URL</h2>
+		<header className="pb-4 pt-4 flex justify-between items-center">
+			<h2>Acortador de URL</h2>
+			<nav className="flex justify-between items-center max-[425px]:hidden md:block">
 				<ul className="flex gap-4">
 					{links.map((data) => (
 						<li key={data.site}>
 							<a href={data.link}>{data.site}</a>
 						</li>
 					))}
-
-					{/*TODO: Hacer una modal*/}
 				</ul>
 			</nav>
+			<MenuMobile divClassName={"flex md:hidden"} />
 		</header>
 	);
 }
