@@ -14,7 +14,10 @@ function UrlContain({ url }: { url: string }) {
 				type="url"
 				value={url}
 				readOnly
-				onClick={(e) => copyToClipboard(e.target.value)}
+				onClick={(e) => {
+          const target = e.target as HTMLInputElement;
+          copyToClipboard(target.value)
+        }}
 			/>
 		</div>
 	);
