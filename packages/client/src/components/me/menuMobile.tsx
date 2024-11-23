@@ -7,7 +7,7 @@ import {
 	MenubarSeparator,
 } from "@/components/ui/menubar";
 
-function MenuMobile({ divClassName }) {
+function MenuMobile({ divClassName }: {divClassName: string}) {
 	return (
 		<div className={divClassName}>
 			<Menubar>
