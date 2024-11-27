@@ -3,7 +3,7 @@ import getUrlById from "../db/getUrlById";
 
 const router = express.Router();
 
-router.get("/:id", async (req: Request, res: Response) => {
+router.get("/api/:id", async (req: Request, res: Response) => {
 	const { id } = req.params;
 	const { code, url, error, errorType } = await getUrlById({ id });
 

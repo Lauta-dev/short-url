@@ -3,7 +3,7 @@ import PushUrls from "../db/PushUrl";
 
 const postUrlInBb = express.Router();
 
-postUrlInBb.post("/url", async (req: Request, res: Response) => {
+postUrlInBb.post("/api/url", async (req: Request, res: Response) => {
 	const url = req.body.url;
 	let statusCode = 200;
 
