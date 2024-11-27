@@ -2,8 +2,13 @@
   "version": 2,
   "builds": [
     {
-      "src": "dist/bundle.cjs",
-      "use": "@vercel/node"
+      "src": "index.ts",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "dist/**"
+        ]
+      }
     }
   ],
   "routes": [
