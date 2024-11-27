@@ -3,16 +3,8 @@
   "buildCommand": "pnpm run build",
   "installCommand": "pnpm install",
   "outputDirectory": "dist",
-  "builds": [
-    {
-      "src": "dist/bundle.cjs",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/bundle.cjs"
-    }
-  ]
+  "cleanUrls": true,
+  "functions": {
+    "api/**/*.ts": {}
+  }
 }
