@@ -11,7 +11,7 @@ const port = 3000;
 // - Express Settings
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.options('*', cors()); // Permite todas las preflight requests
+app.options("*", cors()); // Permite todas las preflight requests
 
 // - Middleware
 app.use(cors());

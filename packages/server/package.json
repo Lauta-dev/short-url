@@ -19,6 +19,8 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.3",
 		"@types/cors": "^2.8.17",
-		"@types/express": "^5.0.0"
+		"@types/express": "^5.0.0",
+		"@types/node": "^22.10.0",
+		"typescript": "^5.7.2"
 	}
 }
