@@ -1,5 +1,8 @@
 {
   "outputDirectory": "dist",
+  "buildCommand": "pnpm run build",
+  "devCommand": "pnpm run start:prod",
+  "installCommand": "pnpm install",
   "rewrites": [
     {
       "source": "/(.*)",
