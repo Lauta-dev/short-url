@@ -1,9 +1,5 @@
 import turso from "./turso.js";
 
-function incrementEnteCount() {
-  // TODO: feat: agregar un contador de cuanto se accede a la URL
-}
-
 async function getUrlById({ id }) {
 	const sql = "SELECT url FROM short_url WHERE uuid = ?";
 
