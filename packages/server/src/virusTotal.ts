@@ -1,8 +1,7 @@
-const apiKey = process.env.VIRUSTOTAL_APIKEY;
+const apiKey = process.env.VIRUSTOTAL_APIKEY || "";
 
-/** @param {string} url */
-async function scanUrl(url) {
-	const options = {
+async function scanUrl(url: string) {
+	const options: RequestInit = {
 		method: "POST",
 		headers: {
 			accept: "application/json",
@@ -25,7 +24,6 @@ async function scanUrl(url) {
 			};
 		}
 
-		/** @type {ScanUrl} */
 		const { data } = await response.json();
 
 		return {
@@ -40,8 +38,7 @@ async function scanUrl(url) {
 	}
 }
 
-/** @param {string} url  */
-async function getReported(url) {
+async function getReported(url: string) {
 	try {
 		const scanUrla = await scanUrl(url);
 
@@ -55,7 +52,6 @@ async function getReported(url) {
 			headers: { accept: "application/json", "x-apikey": apiKey },
 		});
 
-		/** @type {AnalysisData} */
 		let json = await response.json();
 
 		let attributes = json.data.attributes;
@@ -78,17 +74,10 @@ async function getReported(url) {
 			reportStatus = json.data.attributes.status;
 		}
 
-		/** @type {string[]}*/
-		const harmless = [];
-
-		/** @type {string[]}*/
-		const undetected = [];
-
-		/** @type {string[]}*/
-		const suspicious = [];
-
-		/** @type {string[]}*/
-		const malicious = [];
+		const harmless: string[] = [];
+		const undetected: string[] = [];
+		const suspicious: string[] = [];
+		const malicious: string[] = [];
 
 		const results = attributes.results;
 		const resultsKeys = Object.keys(results); // Como el reporte no se un array tengo que hacer esto
@@ -102,7 +91,7 @@ async function getReported(url) {
 			else if (category === "malicious") malicious.push(engine_name);
 		});
 
-		const options = {
+		const options: Intl.DateTimeFormatOptions = {
 			hour12: false, // Esto desactiva el formato de 12 horas
 			year: "numeric",
 			month: "2-digit",
@@ -117,7 +106,7 @@ async function getReported(url) {
 			options,
 		);
 
-		const returnCode = (code) => ({
+		const returnCode = (code: number) => ({
 			code: code,
 			results: {
 				date: formatedUnixDate,

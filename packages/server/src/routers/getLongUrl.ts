@@ -1,14 +1,14 @@
-import express from "express";
-import getUrlById from "../db/getUrlById.js";
+import express, { Response, Request } from "express";
+import getUrlById from "../db/getUrlById";
 
-const getOriginalUrlRouter = express.Router();
+const router = express.Router();
 
-getOriginalUrlRouter.get("/:id", async (req, res) => {
+router.get("/:id", async (req: Request, res: Response) => {
 	const { id } = req.params;
 	const { code, url, error, errorType } = await getUrlById({ id });
 
 	if (error) {
-		return res.status(code).json({
+		res.status(code).json({
 			code,
 			error,
 			url,
@@ -66,4 +66,4 @@ getOriginalUrlRouter.get("/:id", async (req, res) => {
 	res.send(html);
 });
 
-export default getOriginalUrlRouter;
+export default router;

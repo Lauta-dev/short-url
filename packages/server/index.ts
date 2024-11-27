@@ -1,9 +1,8 @@
 import express from "express";
 import cors from "cors";
-import { limiter } from "./src/controllers/rateLimit.js";
-import { corsOptions } from "./src/controllers/cors.js";
-import getOriginalUrlRouter from "./src/routers/getLongUrl.js";
-import postUrlInBb from "./src/routers/PostUrlInDb.js";
+import { limiter } from "./src/controllers/rateLimit";
+import router from "./src/routers/getLongUrl";
+import postUrlInBb from "./src/routers/PostUrlInDb";
 
 const app = express();
 const port = 3000;
@@ -18,7 +17,7 @@ app.use(cors());
 app.use(limiter);
 
 // - routers
-app.use(getOriginalUrlRouter);
+app.use(router);
 app.use(postUrlInBb);
 
 app.listen(port, () => {

@@ -1,6 +1,6 @@
-import turso from "./turso.js";
+import turso from "./turso";
 
-async function getUrlById({ id }) {
+async function getUrlById({ id }: { id: string }) {
 	const sql = "SELECT url FROM short_url WHERE uuid = ?";
 
 	const data = await turso.execute({

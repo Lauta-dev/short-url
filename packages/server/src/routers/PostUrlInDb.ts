@@ -1,23 +1,26 @@
-import express from "express";
-import PushUrls from "../db/PushUrl.js";
-import getReported from "../virusTotal.js";
+import express, { Request, Response } from "express";
+import PushUrls from "../db/PushUrl";
 
 const postUrlInBb = express.Router();
 
-postUrlInBb.post("/url", async (req, res) => {
-	/** @type {string} */
+postUrlInBb.post("/url", async (req: Request, res: Response) => {
 	const url = req.body.url;
+	let statusCode = 200;
 
 	if (!url) {
-		return res.status(404).json({
-			code: 404,
+		statusCode = 400;
+
+		res.status(statusCode).json({
+			code: statusCode,
 			error: "url not defined",
 		});
 	}
 
 	if (!url.startsWith("https://")) {
-		return res.status(400).json({
-			code: 400,
+		statusCode = 400;
+
+		res.status(statusCode).json({
+			code: statusCode,
 			error: "Enter a valid URL like https://example.com",
 		});
 	}
@@ -38,7 +41,7 @@ postUrlInBb.post("/url", async (req, res) => {
 		short,
 	});
 
-	res.status(200).json({ short });
+	res.status(statusCode).json({ short });
 });
 
 export default postUrlInBb;

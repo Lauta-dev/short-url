@@ -1,26 +1,27 @@
 {
-	"name": "short-url",
-	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
-	"type": "module",
-	"scripts": {
-		"dev": "node --watch index.js"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"dependencies": {
-		"@libsql/client": "^0.14.0",
-		"cors": "^2.8.5",
-		"express": "^4.21.0",
-		"express-rate-limit": "^7.4.1"
-	},
-	"devDependencies": {
-		"@biomejs/biome": "1.9.3",
-		"@types/cors": "^2.8.17",
-		"@types/express": "^5.0.0",
-		"@types/node": "^22.10.0",
-		"typescript": "^5.7.2"
-	}
+  "name": "short-url",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild index.ts --bundle --platform=node --outfile=dist/bundle.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@libsql/client": "^0.14.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "express-rate-limit": "^7.4.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.3",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.2"
+  }
 }
