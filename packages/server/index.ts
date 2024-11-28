@@ -5,7 +5,7 @@ import router from "./src/routers/getLongUrl";
 import postUrlInBb from "./src/routers/PostUrlInDb";
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // - Express Settings
 app.use(express.json());
