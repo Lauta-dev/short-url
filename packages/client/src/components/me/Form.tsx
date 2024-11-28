@@ -24,7 +24,7 @@ function FormEstructure({
 		setLoading(true);
 
 		try {
-			const res = await fetch("/api/url", {
+			const res = await fetch("https://short-url-server.vercel.app/api/url", {
 				method: "POST",
 				body: JSON.stringify({ url }),
 				headers: {

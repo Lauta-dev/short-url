@@ -12,12 +12,5 @@ export default defineConfig({
 	},
 	server: {
 		port: 8080,
-		proxy: {
-			"/api": {
-				target: "https://short-url-server.vercel.app/api",
-				changeOrigin: true,
-				rewrite: (path) => path.replace(/^\/api/, "api"),
-			},
-		},
 	},
 });
