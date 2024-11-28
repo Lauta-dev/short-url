@@ -33,7 +33,7 @@ postUrlInBb.post("/api/url", async (req: Request, res: Response) => {
 	}*/
 
 	const uuid = crypto.randomUUID().split("-")[0];
-	const short = `${req.hostname}/${uuid}`;
+	const short = `${req.hostname}/api/${uuid}`;
 
 	await PushUrls({
 		url,
