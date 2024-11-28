@@ -13,7 +13,11 @@ app.use(express.urlencoded({ extended: true }));
 app.options("*", cors()); // Permite todas las preflight requests
 
 // - Middleware
-app.use(cors());
+app.use(
+	cors({
+		origin: "*",
+	}),
+);
 app.use(limiter);
 
 // - routers
