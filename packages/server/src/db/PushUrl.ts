@@ -5,7 +5,7 @@ async function PushUrls({
 	url,
 	short,
 }: { id: string; url: string; short: string }) {
-	const query = "INSERT INTO short_url (uuid, url, short_url) VALUES (?, ?, ?)";
+	const query = "INSERT INTO short_url (uuid, url, shor_url) VALUES (?, ?, ?)";
 
 	await turso.execute({
 		sql: query,
