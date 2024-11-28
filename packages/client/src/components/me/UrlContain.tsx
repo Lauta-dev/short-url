@@ -13,11 +13,12 @@ function UrlContain({ url }: { url: string }) {
 			<Input
 				type="url"
 				value={url}
-				readOnly
+				className="cursor-pointer"
+				readOnlyw-1
 				onClick={(e) => {
-          const target = e.target as HTMLInputElement;
-          copyToClipboard(target.value)
-        }}
+					const target = e.target as HTMLInputElement;
+					copyToClipboard(target.value);
+				}}
 			/>
 		</div>
 	);
