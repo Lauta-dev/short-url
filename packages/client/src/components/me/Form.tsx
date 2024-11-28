@@ -24,7 +24,7 @@ function FormEstructure({
 		setLoading(true);
 
 		try {
-			const res = await fetch("https://short-url-ebon-six.vercel.app/url", {
+			const res = await fetch("/api/url", {
 				method: "POST",
 				body: JSON.stringify({ url }),
 				headers: {
