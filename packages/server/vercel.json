@@ -1,12 +1,15 @@
 {
-  "outputDirectory": "dist",
-  "buildCommand": "pnpm run build",
-  "devCommand": "pnpm run start:prod",
-  "installCommand": "pnpm install",
-  "rewrites": [
+  "version": 2,
+  "builds": [
     {
-      "source": "/(.*)",
-      "destination": "/api"
+      "src": "dist/bundle.cjs",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/bundle.cjs"
     }
   ]
 }
