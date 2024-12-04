@@ -3,15 +3,24 @@ import turso from "./turso";
 async function getUrlById({ id }: { id: string }) {
 	const sql = "SELECT url FROM short_url WHERE uuid = ?";
 
-	const data = await turso.execute({
+	const { rows } = await turso.execute({
 		sql,
 		args: [id],
 	});
 
-	if (data.rows.length < 1) {
+	if (rows.length < 1) {
 		return {
 			error: true,
 			errorType: "ID not exist in the database",
+			code: 404,
+			url: "",
+		};
+	}
+
+	if (rows[0].url === null) {
+		return {
+			error: true,
+			errorType: "URL not exist in the database",
 			code: 404,
 			url: "",
 		};
@@ -21,7 +30,7 @@ async function getUrlById({ id }: { id: string }) {
 		error: false,
 		errorType: "",
 		code: 200,
-		url: data.rows[0].url,
+		url: rows[0].url.toString(),
 	};
 }
 
