@@ -25,7 +25,7 @@ export default function goTo(url: string) {
         <b id="delay"></b>
     </h2>
 		<script>
-      const limit = 5000
+      const limit = 3000
       const afterXSeconds = (second) =>
         \`after \${second}\ seconds\`
 
