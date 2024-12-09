@@ -6,31 +6,32 @@ import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import UrlContain from "./UrlContain";
-import { apiUrl, time } from "@/const";
+import { apiUrl } from "@/const";
 import genDate from "@/lib/genDate";
-
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
-
+import SelectHours from "./SelectHours";
 function FormEstructure({
 	setData,
 }: {
 	setData: React.Dispatch<React.SetStateAction<undefined | Re>>;
 }) {
 	const [inputText, setInputText] = useState<string>("");
-	const [loading, setLoading] = useState<boolean>();
-	const { hours, minutes } = time;
+	const [loading, setLoading] = useState<boolean>(false);
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
 		const formData = new FormData(event.target as HTMLFormElement);
-		const { url, hours, minutes } = Object.fromEntries(formData);
+		const data = Object.fromEntries(formData);
+		let hours = data.hours;
+		let minutes = data.minutes;
+		let url = data.url;
+
+		if (!hours) {
+			hours = (new Date().getHours() + 5).toString();
+		} else if (!minutes) {
+			minutes = new Date().setMinutes(0).toString();
+		}
+
 		const date = genDate({
 			minutes: Number(minutes),
 			hours: Number(hours),
@@ -97,32 +98,7 @@ function FormEstructure({
 				{loading ? <LoadingSpinner /> : "Enviar"}
 			</Button>
 
-			<br />
-
-			<Select name="hours" disabled={loading}>
-				<SelectTrigger className="w-[180px]">
-					<SelectValue placeholder="Horas" />
-				</SelectTrigger>
-				<SelectContent>
-					{hours.map((hour) => (
-						<SelectItem value={hour} key={hour}>
-							{hour}
-						</SelectItem>
-					))}
-				</SelectContent>
-			</Select>
-			<Select name="minutes" disabled={loading}>
-				<SelectTrigger className="w-[180px]">
-					<SelectValue placeholder="Minutos" />
-				</SelectTrigger>
-				<SelectContent>
-					{minutes.map((minute) => (
-						<SelectItem value={minute} key={minute}>
-							{minute}
-						</SelectItem>
-					))}
-				</SelectContent>
-			</Select>
+			<SelectHours loading={loading} />
 		</form>
 	);
 }
