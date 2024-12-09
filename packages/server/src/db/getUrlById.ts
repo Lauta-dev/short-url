@@ -1,7 +1,7 @@
 import turso from "./turso";
 
 async function getUrlById({ id }: { id: string }) {
-	const sql = "SELECT url FROM short_url WHERE uuid = ?";
+	const sql = "SELECT * FROM short_url WHERE uuid = ?";
 
 	const { rows } = await turso.execute({
 		sql,
@@ -22,6 +22,23 @@ async function getUrlById({ id }: { id: string }) {
 			error: true,
 			errorType: "URL not exist in the database",
 			code: 404,
+			url: "",
+		};
+	}
+
+	//TODO:
+	//Checkear este feca localhost/api/3ca0a3d8
+
+	const now = new Date();
+	const validUntil = new Date(rows[0].valid_until_to as string);
+
+	// now >= validUntil - es valido
+	// now <= validUntil - es inválido
+	if (now >= validUntil) {
+		return {
+			error: true,
+			errorType: "URL expired",
+			code: 401,
 			url: "",
 		};
 	}
