@@ -6,6 +6,16 @@ import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import UrlContain from "./UrlContain";
+import { apiUrl, time } from "@/const";
+import genDate from "@/lib/genDate";
+
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 
 function FormEstructure({
 	setData,
@@ -14,19 +24,26 @@ function FormEstructure({
 }) {
 	const [inputText, setInputText] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>();
+	const { hours, minutes } = time;
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
 		const formData = new FormData(event.target as HTMLFormElement);
-		const { url } = Object.fromEntries(formData);
-
+		const { url, hours, minutes } = Object.fromEntries(formData);
+		const date = genDate({
+			minutes: Number(minutes),
+			hours: Number(hours),
+		});
 		setLoading(true);
 
 		try {
-			const res = await fetch("https://short-url-server.vercel.app/api/url", {
+			const res = await fetch(apiUrl, {
 				method: "POST",
-				body: JSON.stringify({ url }),
+				body: JSON.stringify({
+					url,
+					expiresDate: date,
+				}),
 				headers: {
 					Accept: "application/json",
 					"Content-Type": "application/json",
@@ -57,31 +74,56 @@ function FormEstructure({
 	}, [loading]);
 
 	return (
-		<>
-			<form
-				className={`
+		<form
+			className={`
         pt-4 gap-4 flex
         max-[425px]:flex-col`}
-				onSubmit={handleSubmit}
+			onSubmit={handleSubmit}
+		>
+			<Input
+				type="url"
+				placeholder="De su URL"
+				name="url"
+				onChange={handleChange}
+				autoComplete="off"
+				autoFocus={true}
+				disabled={loading}
+			/>
+			<Button
+				className="transition duration-300 ease-in-out"
+				disabled={inputText === "" || loading}
+				type="submit"
 			>
-				<Input
-					type="url"
-					placeholder="De su URL"
-					name="url"
-					onChange={handleChange}
-					autoComplete="off"
-					autoFocus={true}
-					disabled={loading}
-				/>
-				<Button
-					className="transition duration-300 ease-in-out"
-					disabled={inputText === "" || loading}
-					type="submit"
-				>
-					{loading ? <LoadingSpinner /> : "Enviar"}
-				</Button>
-			</form>
-		</>
+				{loading ? <LoadingSpinner /> : "Enviar"}
+			</Button>
+
+			<br />
+
+			<Select name="hours" disabled={loading}>
+				<SelectTrigger className="w-[180px]">
+					<SelectValue placeholder="Horas" />
+				</SelectTrigger>
+				<SelectContent>
+					{hours.map((hour) => (
+						<SelectItem value={hour} key={hour}>
+							{hour}
+						</SelectItem>
+					))}
+				</SelectContent>
+			</Select>
+			<Select name="minutes" disabled={loading}>
+				<SelectTrigger className="w-[180px]">
+					<SelectValue placeholder="Minutos" />
+				</SelectTrigger>
+				<SelectContent>
+					{minutes.map((minute) => (
+						<SelectItem value={minute} key={minute}>
+							{minute}
+						</SelectItem>
+					))}
+				</SelectContent>
+			</Select>
+		</form>
 	);
 }
 
