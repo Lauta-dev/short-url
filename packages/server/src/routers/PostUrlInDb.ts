@@ -4,7 +4,9 @@ import PushUrls from "../db/PushUrl";
 const postUrlInBb = express.Router();
 
 postUrlInBb.post("/api/url", async (req: Request, res: Response) => {
-	const url = req.body.url;
+	const body: { url: string; expiresDate: string } = req.body;
+	const { url, expiresDate } = body;
+	const { hostname } = req;
 	let statusCode = 200;
 
 	if (!url) {
@@ -32,14 +34,7 @@ postUrlInBb.post("/api/url", async (req: Request, res: Response) => {
 		return res.status(virusTotalReport.code).json(virusTotalReport);
 	}*/
 
-	const uuid = crypto.randomUUID().split("-")[0];
-	const short = `${req.hostname}/api/${uuid}`;
-
-	await PushUrls({
-		url,
-		id: uuid,
-		short,
-	});
+	const short = await PushUrls({ url, hostname, expiredDate: expiresDate });
 
 	res.status(statusCode).json({ short });
 });
