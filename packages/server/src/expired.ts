@@ -1,5 +1,4 @@
-
-<!DOCTYPE html>
+const expiredMessageHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -102,4 +101,6 @@
   </div>
 </body>
 </html>
+`;
 
+export default expiredMessageHtml;
