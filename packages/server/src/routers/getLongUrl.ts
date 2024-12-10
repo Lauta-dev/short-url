@@ -1,5 +1,5 @@
 import express, { Response, Request } from "express";
-import getUrlById from "../db/getUrlById";
+import getUrlById from "@/db/getUrlById";
 import goTo from "@/goTo";
 import path from "node:path";
 

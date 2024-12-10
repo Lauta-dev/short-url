@@ -1,4 +1,4 @@
-import turso from "./turso";
+import turso from "@/db/turso";
 
 async function getUrlById({ id }: { id: string }) {
 	const sql = "SELECT * FROM short_url WHERE uuid = ?";

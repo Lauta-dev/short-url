@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import PushUrls from "../db/PushUrl";
+import PushUrls from "@/db/PushUrl";
 
 const postUrlInBb = express.Router();
 

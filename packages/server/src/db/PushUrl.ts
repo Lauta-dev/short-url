@@ -1,4 +1,4 @@
-import turso from "./turso";
+import turso from "@/db/turso";
 
 interface Client {
 	url: string;
