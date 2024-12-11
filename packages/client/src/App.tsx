@@ -1,16 +1,6 @@
 import Header from "@/components/me/header";
-import FormAction from "@/components/me/Form";
-import Footer from "@/components/me/Footer";
-import { Input } from "./components/ui/input";
-import { Button } from "./components/ui/button";
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from "@/components/ui/select";
 import Form from "@/components/me/Form";
+
 function App() {
 	return (
 		<div className="min-h-screen bg-gradient-to-b from-background to-background/80">

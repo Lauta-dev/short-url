@@ -1,10 +1,13 @@
-import MenuMobile from "@/components/me/menuMobile";
 import { Github, Linkedin, Link } from "lucide-react";
 
 function Header() {
 	const links = [
-		{ site: "GitHub", link: "https://github.com/lauta-dev/" },
-		{ site: "aedin", link: "#" },
+		{
+			site: "GitHub",
+			link: "https://github.com/lauta-dev/",
+			component: <Github />,
+		},
+		{ site: "aedin", link: "#", component: <Linkedin /> },
 	];
 
 	return (
@@ -14,20 +17,16 @@ function Header() {
 				URL Shortener
 			</h1>
 			<div className="flex items-center gap-4">
-				<a
-					href="https://github.com"
-					className="text-muted-foreground hover:text-primary"
-				>
-					<Github className="h-5 w-5" />
-					<span className="sr-only">GitHub</span>
-				</a>
-				<a
-					href="https://linkedin.com"
-					className="text-muted-foreground hover:text-primary"
-				>
-					<Linkedin className="h-5 w-5" />
-					<span className="sr-only">aedIn</span>
-				</a>
+				{links.map((link) => (
+					<a
+						key={link.site}
+						href={link.link}
+						className="text-muted-foreground hover:text-primary"
+					>
+						{link.component}
+						<span className="sr-only">{link.site}</span>
+					</a>
+				))}
 			</div>
 		</header>
 	);

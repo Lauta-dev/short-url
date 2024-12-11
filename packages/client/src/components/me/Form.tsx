@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Re } from "@/interface/ResJson";
 import React, { useEffect, useState } from "react";
-import { LoadingSpinner } from "./LoadingSpinner";
 import { toast } from "sonner";
 import { Toaster } from "@/components/ui/sonner";
 import UrlContain from "./UrlContain";
