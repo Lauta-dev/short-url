@@ -1,4 +1,5 @@
 import { Github, Linkedin, Link } from "lucide-react";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 function Header() {
 	const links = [
@@ -27,6 +28,7 @@ function Header() {
 						<span className="sr-only">{link.site}</span>
 					</a>
 				))}
+				<ModeToggle />
 			</div>
 		</header>
 	);
