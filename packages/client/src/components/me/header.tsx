@@ -1,24 +1,34 @@
 import MenuMobile from "@/components/me/menuMobile";
+import { Github, Linkedin, Link } from "lucide-react";
 
 function Header() {
 	const links = [
 		{ site: "GitHub", link: "https://github.com/lauta-dev/" },
-		{ site: "Linkedin", link: "#" },
+		{ site: "aedin", link: "#" },
 	];
 
 	return (
-		<header className="pb-4 pt-4 flex justify-between items-center">
-			<h2>Acortador de URL</h2>
-			<nav className="flex justify-between items-center max-[425px]:hidden md:block">
-				<ul className="flex gap-4">
-					{links.map((data) => (
-						<li key={data.site}>
-							<a href={data.link}>{data.site}</a>
-						</li>
-					))}
-				</ul>
-			</nav>
-			<MenuMobile divClassName={"flex md:hidden"} />
+		<header className="flex items-center justify-between py-6">
+			<h1 className="text-xl font-bold flex items-center gap-4">
+				<Link />
+				URL Shortener
+			</h1>
+			<div className="flex items-center gap-4">
+				<a
+					href="https://github.com"
+					className="text-muted-foreground hover:text-primary"
+				>
+					<Github className="h-5 w-5" />
+					<span className="sr-only">GitHub</span>
+				</a>
+				<a
+					href="https://linkedin.com"
+					className="text-muted-foreground hover:text-primary"
+				>
+					<Linkedin className="h-5 w-5" />
+					<span className="sr-only">aedIn</span>
+				</a>
+			</div>
 		</header>
 	);
 }

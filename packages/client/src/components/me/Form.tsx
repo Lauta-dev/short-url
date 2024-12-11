@@ -9,6 +9,9 @@ import UrlContain from "./UrlContain";
 import { apiUrl } from "@/const";
 import genDate from "@/lib/genDate";
 import SelectHours from "./SelectHours";
+import { Loader } from "lucide-react";
+import { cn } from "@/lib/utils";
+
 function FormEstructure({
 	setData,
 }: {
@@ -76,29 +79,30 @@ function FormEstructure({
 
 	return (
 		<form
-			className={`
-        pt-4 gap-4 flex
-        max-[425px]:flex-col`}
 			onSubmit={handleSubmit}
+			className="space-y-4 rounded-lg border bg-card p-6"
 		>
-			<Input
-				type="url"
-				placeholder="De su URL"
-				name="url"
-				onChange={handleChange}
-				autoComplete="off"
-				autoFocus={true}
-				disabled={loading}
-			/>
+			<div className="space-y-2">
+				<Input
+					type="url"
+					placeholder="De su URL"
+					name="url"
+					onChange={handleChange}
+					autoComplete="off"
+					autoFocus={true}
+					disabled={loading}
+				/>
+			</div>
+
 			<Button
-				className="transition duration-300 ease-in-out"
-				disabled={inputText === "" || loading}
-				type="submit"
+				className="h-12 w-full"
+				size="lg"
+				disabled={loading || inputText.length === 0}
 			>
-				{loading ? <LoadingSpinner /> : "Enviar"}
+				{loading ? <Loader className={cn("animate-spin")} /> : "Enviar"}
 			</Button>
 
-			<SelectHours loading={loading} />
+			<SelectHours loading={loading || inputText.length === 0} />
 		</form>
 	);
 }
