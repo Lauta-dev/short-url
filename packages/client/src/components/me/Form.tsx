@@ -10,6 +10,7 @@ import genDate from "@/lib/genDate";
 import SelectHours from "./SelectHours";
 import { Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { IntentosControl } from "@/components/me/IntentosControl";
 
 function FormEstructure({
 	setData,
@@ -18,6 +19,7 @@ function FormEstructure({
 }) {
 	const [inputText, setInputText] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
+	const [intentos, setIntentos] = useState<number>(0);
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -27,26 +29,38 @@ function FormEstructure({
 		let hours = data.hours;
 		let minutes = data.minutes;
 		let url = data.url;
+		let intentos = Number(data.intentos as string);
+
+		// Para que no se genere un error
+		if (intentos === 0 || intentos === undefined) {
+			intentos = 100;
+		}
 
 		if (!hours) {
 			hours = (new Date().getHours() + 5).toString();
-		} else if (!minutes) {
-			minutes = new Date().setMinutes(0).toString();
 		}
+		if (!minutes) {
+			minutes = new Date().getMinutes().toString();
+		}
+		console.log({ hours, minutes, url, intentos });
 
 		const date = genDate({
 			minutes: Number(minutes),
 			hours: Number(hours),
 		});
+
+		const body = JSON.stringify({
+			url,
+			expiresDate: date,
+			intentos,
+		});
+
 		setLoading(true);
 
 		try {
 			const res = await fetch(apiUrl, {
 				method: "POST",
-				body: JSON.stringify({
-					url,
-					expiresDate: date,
-				}),
+				body,
 				headers: {
 					Accept: "application/json",
 					"Content-Type": "application/json",
@@ -101,7 +115,14 @@ function FormEstructure({
 				{loading ? <Loader className={cn("animate-spin")} /> : "Enviar"}
 			</Button>
 
-			<SelectHours loading={loading || inputText.length === 0} />
+			<SelectHours
+				loading={loading || inputText.length === 0 || intentos > 0}
+			/>
+			<IntentosControl
+				intentos={intentos}
+				setIntentos={setIntentos}
+				disabled={loading || inputText.length === 0}
+			/>
 		</form>
 	);
 }
