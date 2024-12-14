@@ -1,4 +1,5 @@
 import turso from "@/db/turso";
+import { updateIntentos } from "./updateIntentos";
 
 async function getUrlById({ id }: { id: string }) {
 	const sql = "SELECT * FROM short_url WHERE uuid = ?";
@@ -31,6 +32,7 @@ async function getUrlById({ id }: { id: string }) {
 
 	const now = new Date();
 	const validUntil = new Date(rows[0].valid_until_to as string);
+	const intentos = Number(rows[0].intentos);
 
 	// now >= validUntil - es valido
 	// now <= validUntil - es inválido
@@ -42,6 +44,17 @@ async function getUrlById({ id }: { id: string }) {
 			url: "",
 		};
 	}
+
+	if (intentos < 1) {
+		return {
+			error: true,
+			errorType: "URL expired",
+			code: 401,
+			url: "",
+		};
+	}
+
+	await updateIntentos({ id, intentos });
 
 	return {
 		error: false,
