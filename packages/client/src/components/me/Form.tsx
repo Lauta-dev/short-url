@@ -115,7 +115,12 @@ function FormEstructure({
 				{loading ? <Loader className={cn("animate-spin")} /> : "Enviar"}
 			</Button>
 
-			<Options />
+			<Options
+				loading={loading}
+				setIntentos={setIntentos}
+				inputText={inputText}
+				intentos={intentos}
+			/>
 		</form>
 	);
 }
