@@ -7,10 +7,10 @@ import { Toaster } from "@/components/ui/sonner";
 import UrlContain from "./UrlContain";
 import { apiUrl } from "@/const";
 import genDate from "@/lib/genDate";
-import SelectHours from "./SelectHours";
 import { Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { IntentosControl } from "@/components/me/IntentosControl";
+import Options from "./Options";
 
 function FormEstructure({
 	setData,
@@ -115,14 +115,7 @@ function FormEstructure({
 				{loading ? <Loader className={cn("animate-spin")} /> : "Enviar"}
 			</Button>
 
-			<SelectHours
-				loading={loading || inputText.length === 0 || intentos > 0}
-			/>
-			<IntentosControl
-				intentos={intentos}
-				setIntentos={setIntentos}
-				disabled={loading || inputText.length === 0}
-			/>
+			<Options />
 		</form>
 	);
 }
