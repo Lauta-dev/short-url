@@ -20,6 +20,10 @@ app.use(limiter);
 app.use(router);
 app.use(postUrlInBb);
 
+app.get("/", (req, res) => {
+	res.json({ h: "ola" });
+});
+
 app.listen(port, () => {
 	console.log(`Server listening in port: ${port}`);
 });

@@ -2,8 +2,12 @@ GET localhost:3000
 
 ###
 
-POST localhost:3000/url
+POST localhost:3001/url
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 
 url=https://github.com/lauta-dev
+
+###
+
+GET localhost:3001
