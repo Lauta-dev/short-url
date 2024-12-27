@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { limiter } from "./src/controllers/rateLimit";
+import { limiter } from "./config/rateLimit";
 import router from "./src/routers/getLongUrl";
 import postUrlInBb from "./src/routers/PostUrlInDb";
 import { router as getUserUrls } from "./src/routers/getUserUrls";
