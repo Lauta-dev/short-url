@@ -3,6 +3,10 @@ import cors from "cors";
 import { limiter } from "./src/controllers/rateLimit";
 import router from "./src/routers/getLongUrl";
 import postUrlInBb from "./src/routers/PostUrlInDb";
+import { router as getUserUrls } from "./src/routers/getUserUrls";
+import { router as deleteUserUrl } from "./src/routers/deleteUserUrl";
+import { checkIfUserExist } from "./src/db/checkIfUserExist";
+import { isOk } from "./utils/isOk";
 
 const app = express();
 const port = 3001;
@@ -20,8 +24,25 @@ app.use(limiter);
 app.use(router);
 app.use(postUrlInBb);
 
-app.get("/", (req, res) => {
-	res.json({ h: "ola" });
+// - routers (crud)
+app.use(getUserUrls);
+app.use(deleteUserUrl);
+
+app.get("/", async (req, res) => {
+	const { status, message, resultData } = await checkIfUserExist("lautaaa");
+
+	if (!isOk(status)) {
+		res.status(status).json({
+			status,
+			message,
+		});
+		return;
+	}
+
+	res.json({
+		status,
+		resultData,
+	});
 });
 
 app.listen(port, () => {
