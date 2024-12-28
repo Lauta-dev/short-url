@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import { limiter } from "./config/rateLimit";
 import router from "./src/routers/getLongUrl";
-import postUrlInBb from "./src/routers/PostUrlInDb";
+import { router as postUrlInBb } from "./src/routers/PostUrlInDb";
 import { router as getUserUrls } from "./src/routers/getUserUrls";
 import { router as deleteUserUrl } from "./src/routers/deleteUserUrl";
 import { checkIfUserExist } from "./src/db/checkIfUserExist";
