@@ -13,15 +13,20 @@
   "license": "ISC",
   "dependencies": {
     "@libsql/client": "^0.14.0",
+    "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "express": "^4.21.2",
-    "express-rate-limit": "^7.4.1"
+    "express-rate-limit": "^7.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.3",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.1",
+    "@types/passport": "^1.0.17",
     "esbuild": "^0.24.0",
     "typescript": "^5.7.2"
   }
