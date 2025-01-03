@@ -1,7 +1,8 @@
-const esbuild = require('esbuild')
-const depedencies = Object.keys(require('./package.json').dependencies)
+const esbuild = require("esbuild");
+const depedencies = Object.keys(require("./package.json").dependencies);
 
-esbuild.build({
+esbuild
+	.build({
 		entryPoints: ["index.ts"],
 		bundle: true,
 		outfile: "dist/bundle.cjs",
@@ -10,4 +11,6 @@ esbuild.build({
 		format: "cjs",
 		external: depedencies,
 		treeShaking: true,
-	}).then(e => console.log("✅ Bundled successfully.")).catch(error => console.error(error));
+	})
+	.then(() => console.log("✅ Bundled successfully."))
+	.catch((error) => console.error(error));
