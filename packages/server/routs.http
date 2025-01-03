@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0NzUzOTUwLTJkOTMtNDU0ZC1hMDU2LTNkYmRmYTZjYzBlOCIsImlhdCI6MTczNTkwOTA4NiwiZXhwIjoxNzM1OTEyNjg2fQ.sWdWlmN21Fd6svGjlUlUce2xYD_sIHotWhxz4w_jlDU
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QzIiwiaWF0IjoxNzM1OTE0ODg2LCJleHAiOjE3MzU5MTg0ODZ9.biwm8HJzaCmOC2XLDttbSKkITDxPf_zUQTQ-NNje8S0
 
 ###
 
@@ -6,7 +6,7 @@ POST localhost:3001/register
 Content-Type: application/json
 
 {
-  "username": "test2",
+  "username": "test3",
   "password": "test"
 }
 

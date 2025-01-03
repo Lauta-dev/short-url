@@ -1,5 +1,3 @@
-import { NextFunction, Request, Response } from "express";
-
 export function authMessage(err, req, res, next) {
 	if (err.name === "UnauthorizedError") {
 		// Enviar un mensaje personalizado en caso de fallo en la autenticación
