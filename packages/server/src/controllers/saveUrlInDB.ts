@@ -8,6 +8,9 @@ export async function saveUrlInDB(req: Request, res: Response) {
 	let intentos = Number(body.intentos);
 	let statusCode = 200;
 
+	// Obtener el token del header
+	let token = req.header("Authorization")?.split("Bearer")[1].trim() || "";
+
 	if (!url) {
 		statusCode = 400;
 
@@ -15,6 +18,8 @@ export async function saveUrlInDB(req: Request, res: Response) {
 			code: statusCode,
 			error: "url not defined",
 		});
+
+		return;
 	}
 
 	if (!url.startsWith("https://")) {
@@ -24,6 +29,8 @@ export async function saveUrlInDB(req: Request, res: Response) {
 			code: statusCode,
 			error: "Enter a valid URL like https://example.com",
 		});
+
+		return;
 	}
 
 	// TODO: mejorar el checkeo por VT
@@ -36,8 +43,9 @@ export async function saveUrlInDB(req: Request, res: Response) {
 	const short = await PushUrls({
 		url,
 		hostname,
-		expiredDate: expiresDate,
+		expiredDate: new Date().toUTCString(),
 		intentos,
+		token,
 	});
 
 	res.status(statusCode).json({ short });
