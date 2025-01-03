@@ -54,8 +54,6 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 		id: data.id,
 	});
 
-	console.log(data);
-
 	const compare = comparePw(password, data.password as string);
 
 	if (!compare) {
