@@ -25,7 +25,7 @@ async function PushUrls({
 
 	if (token) {
 		const pay = getInfoFromToken(token);
-		const user = await getUserById(pay);
+		const user = await getUserById(pay?.id);
 
 		if (user?.exist) {
 			userId = user.id;

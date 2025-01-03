@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0NzUzOTUwLTJkOTMtNDU0ZC1hMDU2LTNkYmRmYTZjYzBlOCIsImlhdCI6MTczNTg2MDQxNiwiZXhwIjoxNzM1ODY0MDE2fQ.cIwzFeL6mGhZelyezzWxLPhOv9e6BVOBc1sCFcbsUrA
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ijc0NzUzOTUwLTJkOTMtNDU0ZC1hMDU2LTNkYmRmYTZjYzBlOCIsImlhdCI6MTczNTkwOTA4NiwiZXhwIjoxNzM1OTEyNjg2fQ.sWdWlmN21Fd6svGjlUlUce2xYD_sIHotWhxz4w_jlDU
 
 ###
 
@@ -6,7 +6,7 @@ POST localhost:3001/register
 Content-Type: application/json
 
 {
-  "username": "test",
+  "username": "test2",
   "password": "test"
 }
 
@@ -67,6 +67,8 @@ DELETE localhost:3001/api/user/delete/d342511b?user_id=1
 
 POST localhost:3001/api/url
 Content-Type: application/json
+Authorization: Bearer {{token}}
+
 
 {
   "expiresDate": "asd",

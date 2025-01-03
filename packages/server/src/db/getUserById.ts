@@ -2,7 +2,7 @@ import turso from "@db/turso";
 
 export async function getUserById(username: string) {
 	try {
-		const sql = "SELECT id, password, salt FROM users WHERE name = ?";
+		const sql = "SELECT id, password, salt FROM users WHERE id = ?";
 
 		const { rows } = await turso.execute({
 			sql,

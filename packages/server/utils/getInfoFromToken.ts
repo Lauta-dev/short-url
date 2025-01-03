@@ -5,7 +5,7 @@ export function getInfoFromToken(token: string) {
 		const secret = process.env.JWT_SECRET as string;
 		const payload = verify(token, secret) as JwtPayload;
 
-		return payload.username;
+		return payload;
 	} catch (error) {
 		console.error(error);
 	}
