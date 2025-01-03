@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { getUserById } from "@db/getUserById";
 import { accessToken } from "@utils/genAccessToken";
 import { triggerResponse } from "@utils/triggerResponse";
 import { comparePw } from "@utils/hashPw";
+import { getUserByUsername } from "@/db/getUserByUsername";
 
 interface PersonModel {
 	username: string | undefined;
@@ -39,7 +39,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 		return;
 	}
 
-	const data = await getUserById(username);
+	const data = await getUserByUsername(username);
 
 	if (!data?.exist) {
 		triggerResponse({
