@@ -3,13 +3,12 @@ import { Input } from "@/components/ui/input";
 import { Re } from "@/interface/ResJson";
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { Toaster } from "@/components/ui/sonner";
 import UrlContain from "./UrlContain";
 import { apiUrl } from "@/const";
 import genDate from "@/lib/genDate";
 import { Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { IntentosControl } from "@/components/me/IntentosControl";
+//import { IntentosControl } from "@/components/me/IntentosControl";
 import Options from "./Options";
 
 function FormEstructure({
