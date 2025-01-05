@@ -1,4 +1,5 @@
 import Header from "@/components/me/header";
+import { Toaster } from "sonner";
 
 export function Layout({
 	children,
@@ -12,6 +13,7 @@ export function Layout({
 					<div className={`space-y-8 ${className}`}>{children}</div>
 				</main>
 			</div>
+			<Toaster position="bottom-center" richColors />
 		</div>
 	);
 }

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,22 +9,12 @@ import {
 	CardTitle,
 } from "@/components/ui/card";
 import { AccountAsk } from "./accountAsk";
+import { loginUserApi } from "@/const";
+
+import useAuthSubmit from "@/hook/useAuthSubmit";
 
 export default function LoginForm() {
-	const [formData, setFormData] = useState({
-		email: "",
-		password: "",
-	});
-
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setFormData({ ...formData, [e.target.name]: e.target.value });
-	};
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// Here you would typically send the data to your backend
-		console.log("Login data:", formData);
-	};
+	const { handleSubmit } = useAuthSubmit(loginUserApi);
 
 	return (
 		<Card className="w-full max-w-md">
@@ -38,26 +27,12 @@ export default function LoginForm() {
 			<CardContent>
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<div className="space-y-2">
-						<Label htmlFor="email">Email</Label>
-						<Input
-							id="email"
-							name="email"
-							type="email"
-							required
-							value={formData.email}
-							onChange={handleChange}
-						/>
+						<Label htmlFor="email">Username</Label>
+						<Input id="username" name="username" type="text" required />
 					</div>
 					<div className="space-y-2">
 						<Label htmlFor="password">Password</Label>
-						<Input
-							id="password"
-							name="password"
-							type="password"
-							required
-							value={formData.password}
-							onChange={handleChange}
-						/>
+						<Input id="password" name="password" type="password" required />
 					</div>
 					<Button type="submit" className="w-full">
 						Login

@@ -15,5 +15,9 @@ const minutes = Array.from({ length: 60 }, (_, i) =>
 	i.toString().padStart(2, "0"),
 );
 
-export const apiUrl = prefix + path;
-export const time = { hours, minutes };
+const apiUrl = prefix + path;
+const registerUserApi = prefix + "/register";
+const loginUserApi = prefix + "/login";
+const time = { hours, minutes };
+
+export { apiUrl, registerUserApi, loginUserApi, time };

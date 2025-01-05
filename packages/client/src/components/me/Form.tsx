@@ -131,7 +131,6 @@ function Form() {
 		<>
 			<FormEstructure setData={setData} />
 			{data && <UrlContain url={data.short} />}
-			<Toaster position="bottom-center" richColors />
 		</>
 	);
 }
