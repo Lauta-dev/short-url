@@ -28,7 +28,7 @@ export async function register(req: Request, res: Response) {
 		// Genera el token si el registro es correcto
 		let token = "";
 		if (data.statusCode === 200) {
-			token = accessToken({ username: req.body.username });
+			token = accessToken({ id: data.id });
 		}
 		triggerResponse({
 			res,

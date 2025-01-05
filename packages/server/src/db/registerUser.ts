@@ -10,15 +10,16 @@ export async function registerUser({
 	try {
 		const sql =
 			"INSERT INTO users (id, name, password, salt) VALUES (?, ?, ?, ?)";
+		const id = crypto.randomUUID();
 
 		const { hash, salt } = hashPw(password);
 
 		await turso.execute({
 			sql,
-			args: [crypto.randomUUID(), username, hash, salt],
+			args: [id, username, hash, salt],
 		});
 
-		return { statusCode: 200, message: "Usuario creado con exito!" };
+		return { statusCode: 200, message: "Usuario creado con exito!", id };
 	} catch (error) {
 		const libSqliError = error as LibsqlError;
 		let statusCode = 500;
