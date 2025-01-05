@@ -1,7 +1,6 @@
 import { Github, Linkedin, Link } from "lucide-react";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { NavLink } from "react-router";
-import { m } from "node_modules/react-router/dist/development/fog-of-war-BhhVTjSZ.d.mts";
 import { Button } from "../ui/button";
 
 function Header() {
@@ -17,11 +16,11 @@ function Header() {
 	const login = [
 		{
 			to: "/login",
-			text: "Login",
+			text: "Iniciar sesión",
 		},
 		{
 			to: "/register",
-			text: "sign Up",
+			text: "Crear cuenta",
 		},
 	];
 
@@ -43,11 +42,9 @@ function Header() {
 					</a>
 				))}
 				{login.map(({ text, to }) => (
-					<Button variant="ghost">
-						<NavLink key={text} to={to} className="">
-							{text}
-						</NavLink>
-					</Button>
+					<NavLink key={text} to={to} className="">
+						<Button variant="ghost">{text}</Button>
+					</NavLink>
 				))}
 				<ModeToggle />
 			</div>

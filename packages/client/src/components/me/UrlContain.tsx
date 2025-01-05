@@ -13,7 +13,7 @@ function UrlContain({ url }: { url: string }) {
 			setTimeout(() => setCopied(false), 2000);
 			toast.success("URL copiada al portapapeles");
 		} catch (err) {
-			console.error("Failed to copy:", err);
+			toast.error("Error al copiar la url al portapapeles.");
 		}
 	}
 
@@ -22,7 +22,7 @@ function UrlContain({ url }: { url: string }) {
 			<CardContent className="p-6">
 				<div className="space-y-4">
 					<p className="text-sm text-muted-foreground text-center">
-						Click the URL to copy it
+						Haga click para copiar la URL
 					</p>
 					<div
 						onClick={copyToClipboard}
@@ -40,7 +40,7 @@ function UrlContain({ url }: { url: string }) {
 							) : (
 								<Copy className="h-4 w-4" />
 							)}
-							<span className="sr-only">Copy URL</span>
+							<span className="sr-only">Copiar URL</span>
 						</Button>
 					</div>
 				</div>

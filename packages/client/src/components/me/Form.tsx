@@ -74,7 +74,9 @@ function FormEstructure({
 
 			setData(json);
 		} catch (error) {
-			throw new Error(error as string);
+			return toast.error(
+				"Ocurrió un error al generar el URL, Intentelo de nuevo más tarde",
+			);
 		} finally {
 			setLoading(false);
 		}

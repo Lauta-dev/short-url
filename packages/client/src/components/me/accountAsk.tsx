@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
 
 interface AccountAskI {
-	message: "Do you have an account?" | "Don't you have an account?";
+	message: string;
 	path: "/login" | "/register";
-	mention: "Log in" | "Sign up";
+	mention: string;
 }
 
 export function AccountAsk({ message, path, mention }: AccountAskI) {
