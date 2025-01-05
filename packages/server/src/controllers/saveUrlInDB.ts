@@ -1,4 +1,5 @@
 import PushUrls from "@/db/PushUrl";
+import { triggerResponse } from "@utils/triggerResponse";
 import { Request, Response } from "express";
 
 export async function saveUrlInDB(req: Request, res: Response) {
@@ -12,22 +13,20 @@ export async function saveUrlInDB(req: Request, res: Response) {
 	let token = req.header("Authorization")?.split("Bearer")[1].trim() || "";
 
 	if (!url) {
-		statusCode = 400;
-
-		res.status(statusCode).json({
-			code: statusCode,
-			error: "Se require la URL",
+		triggerResponse({
+			res,
+			code: 400,
+			message: "Se require la URL",
 		});
 
 		return;
 	}
 
 	if (!url.startsWith("https://")) {
-		statusCode = 400;
-
-		res.status(statusCode).json({
-			code: statusCode,
-			error: "La url no valida",
+		triggerResponse({
+			res,
+			code: 400,
+			message: "Url no valida",
 		});
 
 		return;
@@ -48,5 +47,10 @@ export async function saveUrlInDB(req: Request, res: Response) {
 		token,
 	});
 
-	res.status(statusCode).json({ short });
+	triggerResponse({
+		res,
+		code: 200,
+		message: "Url generada",
+		anyData: {},
+	});
 }

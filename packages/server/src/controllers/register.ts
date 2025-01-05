@@ -1,19 +1,24 @@
 import { registerUser } from "@/db/registerUser";
 import { accessToken } from "@utils/genAccessToken";
+import { triggerResponse } from "@utils/triggerResponse";
 import { Request, Response } from "express";
 
 export async function register(req: Request, res: Response) {
 	const { username, password } = req.body;
 
 	if (!username) {
-		res
-			.status(400)
-			.json({ statusCode: 400, message: "Es requerido el nombre de usuario" });
+		triggerResponse({
+			res,
+			message: "El nombre de usuario es requerido",
+			code: 400,
+		});
 		return;
 	} else if (!password) {
-		res
-			.status(400)
-			.json({ statusCode: 400, message: "Es requerido la contraseña" });
+		triggerResponse({
+			res,
+			message: "La contraseña es requerida",
+			code: 400,
+		});
 		return;
 	}
 
@@ -25,11 +30,20 @@ export async function register(req: Request, res: Response) {
 		if (data.statusCode === 200) {
 			token = accessToken({ username: req.body.username });
 		}
-
-		res.status(data.statusCode).json({ ...data, token: token || undefined, statusCode: data.statusCode });
+		triggerResponse({
+			res,
+			code: data.statusCode,
+			anyData: {
+				...data,
+				token: token,
+			},
+		});
 	} catch (error) {
 		// TODO: Manejo de errores, enviar mensaje adecuado
-		console.error(error);
-		res.status(500).json({ message: "Error en el registro" });
+		triggerResponse({
+			res,
+			code: 500,
+			message: "Error en el registro",
+		});
 	}
 }
