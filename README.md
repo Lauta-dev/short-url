@@ -1,4 +1,4 @@
-![screenshort](./packages/client/shorturlscreen.png)
+![screenshort](https://raw.githubusercontent.com/Lauta-dev/resource/refs/heads/main/short-url.webp)
 
 # Short URL
 
