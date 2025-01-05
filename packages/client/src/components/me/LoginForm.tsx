@@ -9,6 +9,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card";
+import { AccountAsk } from "./accountAsk";
 
 export default function LoginForm() {
 	const [formData, setFormData] = useState({
@@ -63,6 +64,12 @@ export default function LoginForm() {
 					</Button>
 				</form>
 			</CardContent>
+
+			<AccountAsk
+				mention="Sign up"
+				path="/register"
+				message="Don't you have an account?"
+			/>
 		</Card>
 	);
 }
