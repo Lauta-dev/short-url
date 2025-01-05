@@ -26,7 +26,7 @@ export async function register(req: Request, res: Response) {
 			token = accessToken({ username: req.body.username });
 		}
 
-		res.status(data.statusCode).json({ ...data, token: token || undefined });
+		res.status(data.statusCode).json({ ...data, token: token || undefined, statusCode: data.statusCode });
 	} catch (error) {
 		// TODO: Manejo de errores, enviar mensaje adecuado
 		console.error(error);

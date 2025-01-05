@@ -16,5 +16,6 @@ export function triggerResponse({
 	res.status(code).json({
 		message: `${message}`,
 		...anyData,
+		statusCode: code,
 	});
 }

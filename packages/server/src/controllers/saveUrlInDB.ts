@@ -16,7 +16,7 @@ export async function saveUrlInDB(req: Request, res: Response) {
 
 		res.status(statusCode).json({
 			code: statusCode,
-			error: "url not defined",
+			error: "Se require la URL",
 		});
 
 		return;
@@ -27,7 +27,7 @@ export async function saveUrlInDB(req: Request, res: Response) {
 
 		res.status(statusCode).json({
 			code: statusCode,
-			error: "Enter a valid URL like https://example.com",
+			error: "La url no valida",
 		});
 
 		return;

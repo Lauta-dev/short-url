@@ -15,7 +15,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 	if (!username) {
 		triggerResponse({
 			res,
-			message: "username is required",
+			message: "El nombre de usuario es requerido",
 			code: 400,
 		});
 		return;
@@ -24,7 +24,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 	if (!password) {
 		triggerResponse({
 			res,
-			message: "password is required",
+			message: "La contraseña es requerida",
 			code: 400,
 		});
 		return;
@@ -33,7 +33,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 	if (!username && !password) {
 		triggerResponse({
 			res,
-			message: "username and password is required",
+			message: "El nombre de usuario y contraseña son requeridos",
 			code: 400,
 		});
 		return;
@@ -44,7 +44,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 	if (!data?.exist) {
 		triggerResponse({
 			res,
-			message: "User not found",
+			message: "Usuario no encontrado",
 			code: 404,
 		});
 		return;
@@ -59,7 +59,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 	if (!compare) {
 		triggerResponse({
 			res,
-			message: "Invalid password",
+			message: "Contraseña invalida",
 			code: 404,
 		});
 
