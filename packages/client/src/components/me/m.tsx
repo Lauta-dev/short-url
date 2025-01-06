@@ -114,9 +114,7 @@ export default function UrlManager() {
 			{urls?.map((url) => (
 				<div
 					key={url.id}
-					className={`p-4 rounded-lg border transition-colors ${
-						url.isActive ? "bg-white" : "bg-gray-100"
-					}`}
+					
 				>
 					<div className="space-y-2">
 						<div className="flex items-center justify-between">
