@@ -2,7 +2,7 @@ import turso from "@/db/turso";
 
 export async function getUserUrls({ id }: { id: string }) {
 	const sql =
-		"SELECT url, shor_url, created_at, valid FROM short_url WHERE user_id = ?";
+		"SELECT url, shor_url AS shortUrl, created_at AS createdAt, valid AS isActive FROM short_url WHERE user_id = ?";
 	let message = "";
 	let code = 200;
 
