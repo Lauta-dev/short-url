@@ -1,7 +1,7 @@
 import { deleteUrl } from "@/controllers/deleteUrl";
+import { authenticateJWT } from "@/middleware/authenticateJWT";
 import express from "express";
 
 export const router = express.Router();
 
-// TODO: Proteger esta ruta
-router.delete("/api/user/delete/:url_id", deleteUrl);
+router.delete("/api/user/delete/", authenticateJWT, deleteUrl);

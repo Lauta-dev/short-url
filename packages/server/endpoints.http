@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVmODJjNDQ2LTcwZjctNDQ0OS04YzgyLTQ2MDEyMDUyOWUxMCIsImlhdCI6MTczNjE5MTY4NSwiZXhwIjoxNzM2MTk1Mjg1fQ.520vfwcRrcRl-rEHWgI4qQFQ4zgD2d-N0Pcocgmg8E4
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZDE1MTI1LWRlMmItNDMwOC1iYjRhLTI4ZjgyNWFmZmE0MSIsImlhdCI6MTczNjE5Mzc5NCwiZXhwIjoxNzM2MTk3Mzk0fQ.mfxGrwa5R1wsdI1utqbq7-6_BTPPW_SkoQAyjrM8XA0
 
 @app=localhost:3001
 
@@ -58,4 +58,15 @@ Authorization: Bearer {{token}}
 {
   "id": "cf446ce6",
   "newState": 0
+}
+
+
+###
+
+DELETE {{app}}/api/user/delete
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "urlId": "19432c19"
 }

@@ -9,6 +9,8 @@ export async function deleteUserUrl({
 	let message = "";
 	let code = 200;
 
+	console.log(urlId, userId);
+
 	const data = await turso.execute({
 		sql,
 		args: [urlId, userId],

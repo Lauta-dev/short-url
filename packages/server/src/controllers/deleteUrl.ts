@@ -1,11 +1,18 @@
 import { deleteUserUrl } from "@/db/deleteUserUrl";
 import { Request, Response } from "express";
 
-export async function deleteUrl(req: Request, res: Response) {
+interface DeleteUrlBody {
+	urlId: string;
+}
+
+export async function deleteUrl(
+	req: Request<{}, {}, DeleteUrlBody>,
+	res: Response,
+) {
 	try {
-		const { url_id } = req.params;
-		const userId = req.query.user_id as string;
-		const urlId = url_id as string;
+		const { urlId } = req.body;
+		const user = req.user as { id: string };
+		const userId = user.id;
 
 		const data = await deleteUserUrl({ userId, urlId });
 		res.status(data.code).json({ ...data });
