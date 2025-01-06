@@ -1,8 +1,8 @@
 import turso from "@/db/turso";
 
 export async function getUserUrls({ id }: { id: string }) {
-	// TODO: Checkear si el usuario existe
-	const sql = "SELECT * FROM short_url WHERE user_id = ?";
+	const sql =
+		"SELECT url, shor_url, created_at, valid FROM short_url WHERE user_id = ?";
 	let message = "";
 	let code = 200;
 
