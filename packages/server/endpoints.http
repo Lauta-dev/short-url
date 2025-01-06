@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZDE1MTI1LWRlMmItNDMwOC1iYjRhLTI4ZjgyNWFmZmE0MSIsImlhdCI6MTczNjE5Mzc5NCwiZXhwIjoxNzM2MTk3Mzk0fQ.mfxGrwa5R1wsdI1utqbq7-6_BTPPW_SkoQAyjrM8XA0
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIxZWExNjc0LTFlNjMtNDZjMi1hYjBhLWU2YWI5ZTJlZTdhZSIsImlhdCI6MTczNjIwMjg2NiwiZXhwIjoxNzM2MjA2NDY2fQ.9EssIn_FMGl85XiIT5w5o3dhcinDk4BpK6TYYNRzZqI
 
 @app=localhost:3001
 
@@ -56,7 +56,7 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": "cf446ce6",
+  "id": "a621ffdb",
   "newState": 0
 }
 

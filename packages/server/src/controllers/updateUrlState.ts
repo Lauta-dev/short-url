@@ -45,6 +45,9 @@ export async function updateUrlState(
 			res,
 			code: data.statusCode,
 			message: data.message,
+			anyData: {
+				newUrls: data.urls,
+			},
 		});
 	} catch (error) {
 		console.log(error);

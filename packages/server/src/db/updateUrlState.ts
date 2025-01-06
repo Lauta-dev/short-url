@@ -1,4 +1,5 @@
 import turso from "@db/turso";
+import { getUserUrls } from "./getUserUrls";
 
 interface UpdateStateArgs {
 	id: string;
@@ -27,9 +28,12 @@ export async function updateUrlState({
 			};
 		}
 
+		const urls = await getUserUrls({ id: userId });
+
 		return {
 			statusCode: 200,
 			message: `La url se ${isActive ? "activo" : "desactivo"}`,
+			urls: urls.rows,
 		};
 	} catch (error) {
 		console.log(error);
