@@ -5,6 +5,7 @@ import router from "./src/routers/getLongUrl";
 import { router as postUrlInBb } from "./src/routers/PostUrlInDb";
 import { router as getUserUrls } from "./src/routers/getUserUrls";
 import { router as deleteUserUrl } from "./src/routers/deleteUserUrl";
+import { router as updateResource } from "./src/routers/updateResource";
 import { strategy } from "./config/passport";
 import passport from "passport";
 import { user } from "./src/routers/user";
@@ -33,6 +34,7 @@ app.use(postUrlInBb);
 // - routers (crud)
 app.use(getUserUrls);
 app.use(deleteUserUrl);
+app.use(updateResource);
 
 // - user
 app.use(user);

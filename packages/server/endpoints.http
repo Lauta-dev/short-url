@@ -1,18 +1,20 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZDE1MTI1LWRlMmItNDMwOC1iYjRhLTI4ZjgyNWFmZmE0MSIsImlhdCI6MTczNjEyMDIwMiwiZXhwIjoxNzM2MTIzODAyfQ.9375htDtALgov0YGa9fVVxztD0sKV2db3XrMpVydmJc
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImVmODJjNDQ2LTcwZjctNDQ0OS04YzgyLTQ2MDEyMDUyOWUxMCIsImlhdCI6MTczNjE5MTY4NSwiZXhwIjoxNzM2MTk1Mjg1fQ.520vfwcRrcRl-rEHWgI4qQFQ4zgD2d-N0Pcocgmg8E4
+
+@app=localhost:3001
 
 ###
 
-POST localhost:3001/register
+POST {{app}}/register
 Content-Type: application/json
 
 {
-  "username": "test3asd",
+  "username": "lautaro",
   "password": "test"
 }
 
 ###
 
-POST localhost:3001/login
+POST {{app}}/login
 Content-Type: application/json
 
 {
@@ -22,7 +24,7 @@ Content-Type: application/json
 
 ###
 
-POST localhost:3001/api/url
+POST {{app}}/api/url
 Content-Type: application/x-www-form-urlencoded
 Accept: application/json
 Authorization: Bearer {{token}}
@@ -31,30 +33,29 @@ url=https://github.com/lauta-dev
 
 ###
 
-GET localhost:3001/api/user/getUrls?id=3ad15125-de2b-4308-bb4a-28f825affa41
+GET {{app}}/api/user/getUrls?id=3ad15125-de2b-4308-bb4a-28f825affa41
 
 ###
-
-DELETE localhost:3001/api/user/delete/d342511b?user_id=1
-
-
-###
-
-# Registar usuario
-
-
-###
-
 
 # Enviar url
 
-POST localhost:3001/api/url
+POST {{app}}/api/url
 Content-Type: application/json
 Authorization: Bearer {{token}}
-
 
 {
   "expiresDate": "asd",
   "url": "https://google.com",
   "intentos": "40"
+}
+
+###
+
+PUT {{app}}/api/user/update
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "id": "cf446ce6",
+  "newState": 0
 }
