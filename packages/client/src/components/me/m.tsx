@@ -38,7 +38,7 @@ export default function UrlManager() {
 
 				const token = getToken();
 
-				const f = await fetch(apiUrl + "/api/user/getUrls", {
+				const f = await fetch(apiUrl + "/user/getUrls", {
 					headers: {
 						Authorization: "Bearer " + token,
 					},
@@ -89,7 +89,7 @@ export default function UrlManager() {
 					newState: state ? 0 : 1,
 				});
 
-				const f = await fetch(apiUrl + "/api/user/update", {
+				const f = await fetch(apiUrl + "/user/update", {
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: "Bearer " + token,

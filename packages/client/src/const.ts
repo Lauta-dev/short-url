@@ -3,7 +3,7 @@ let prefix =
 		? "https://short-url-server.vercel.app"
 		: "http://localhost:3001";
 
-const path = "/api/url";
+const path = "/api";
 
 // NOTE: estoy pensando evitar llenar todo el array.
 // por ejemplo: si el user quiere crear una url a las 18:00 el array SOLO contendra

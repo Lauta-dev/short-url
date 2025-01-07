@@ -33,7 +33,7 @@ function FormEstructure({
 
 		try {
 			const token = getToken();
-			const res = await fetch(apiUrl, {
+			const res = await fetch(apiUrl + "/url", {
 				method: "POST",
 				body,
 				headers: {
