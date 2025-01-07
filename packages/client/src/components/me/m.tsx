@@ -7,6 +7,7 @@ import { getToken } from "@/lib/getSetLocalStorage";
 import Unauthorized from "./Unauthorized";
 import ErrorDisplay from "./error-display";
 import { SpinLoader } from "./Loader";
+import NoSavedURLs from "./no-saved-urls";
 
 interface Url {
 	id: string;
@@ -27,6 +28,7 @@ export default function UrlManager() {
 	const [loading, setLoading] = useState(false);
 	const [unauthorized, setUnauthorized] = useState(false);
 	const [updateElement, setUpdateElement] = useState(false);
+	const [notUrls, setNotUrls] = useState(false);
 
 	useEffect(() => {
 		async function getUrls() {
@@ -40,6 +42,11 @@ export default function UrlManager() {
 						Authorization: "Bearer " + token,
 					},
 				});
+
+				if (f.status === 404) {
+					setNotUrls(true);
+					return;
+				}
 
 				if (f.status === 401) {
 					setUnauthorized(true);
@@ -105,6 +112,8 @@ export default function UrlManager() {
 
 	return loading ? (
 		<SpinLoader />
+	) : notUrls ? (
+		<NoSavedURLs />
 	) : fetchError ? (
 		<ErrorDisplay />
 	) : unauthorized ? (
@@ -112,10 +121,7 @@ export default function UrlManager() {
 	) : (
 		<div className="grid gap-4 sm:grid-cols-2">
 			{urls?.map((url) => (
-				<div
-					key={url.id}
-					
-				>
+				<div key={url.id}>
 					<div className="space-y-2">
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-2">

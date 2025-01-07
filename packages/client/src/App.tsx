@@ -1,13 +1,7 @@
 import Form from "@/components/me/Form";
-import { Layout } from "./layout";
-import UrlManager from "./components/me/m";
 
 function App() {
-	return (
-		<Layout>
-			<UrlManager />
-		</Layout>
-	);
+	return <Form />;
 }
 
 export default App;

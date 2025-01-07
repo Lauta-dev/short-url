@@ -32,7 +32,6 @@ function useAuthSubmit(apiEndpoint: string) {
 
 			const result = await response.json();
 
-			console.log({ result });
 			if (result.statusCode !== 200) {
 				return toast.warning(result.message);
 			}

@@ -1,4 +1,4 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImIxZWExNjc0LTFlNjMtNDZjMi1hYjBhLWU2YWI5ZTJlZTdhZSIsImlhdCI6MTczNjIwMjg2NiwiZXhwIjoxNzM2MjA2NDY2fQ.9EssIn_FMGl85XiIT5w5o3dhcinDk4BpK6TYYNRzZqI
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI1OGI4MWY5LTE4ZDAtNDNjMS1iMDJjLWI2YjdjYTBkNzkxMyIsImlhdCI6MTczNjIwOTcyOSwiZXhwIjoxNzM2MjEzMzI5fQ.Wepy4bX8xSil4KnWbPpRcyrSc4EBb8yZ3ee4P-TUJwA
 
 @app=localhost:3001
 
@@ -8,7 +8,7 @@ POST {{app}}/register
 Content-Type: application/json
 
 {
-  "username": "lautaro",
+  "username": "mario",
   "password": "test"
 }
 
@@ -18,22 +18,14 @@ POST {{app}}/login
 Content-Type: application/json
 
 {
-  "username": "test2",
+  "username": "lautaro",
   "password": "test"
 }
 
 ###
 
-POST {{app}}/api/url
-Content-Type: application/x-www-form-urlencoded
-Accept: application/json
+GET {{app}}/api/user/getUrls
 Authorization: Bearer {{token}}
-
-url=https://github.com/lauta-dev
-
-###
-
-GET {{app}}/api/user/getUrls?id=3ad15125-de2b-4308-bb4a-28f825affa41
 
 ###
 
@@ -56,8 +48,8 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "id": "a621ffdb",
-  "newState": 0
+  "id": "4c0f16d9",
+  "newState": 1
 }
 
 
@@ -68,5 +60,5 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "urlId": "19432c19"
+  "urlId": "4c0f16d9"
 }

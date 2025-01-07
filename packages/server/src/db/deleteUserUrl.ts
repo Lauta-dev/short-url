@@ -5,7 +5,7 @@ export async function deleteUserUrl({
 	userId,
 }: { urlId: string; userId: string }) {
 	// TODO: Checkear si el usuario existe
-	const sql = "DELETE FROM short_url WHERE uuid = ? AND user_id = ?";
+	const sql = "DELETE FROM urls WHERE id = ? AND user_id = ?";
 	let message = "";
 	let code = 200;
 

@@ -14,7 +14,7 @@ export async function updateUrlState({
 	userId,
 }: UpdateStateArgs) {
 	try {
-		const sql = "UPDATE short_url SET valid = ? WHERE uuid = ? AND user_id = ?";
+		const sql = "UPDATE urls SET is_active = ? WHERE id = ? AND user_id = ?";
 
 		const data = await turso.execute({
 			sql,

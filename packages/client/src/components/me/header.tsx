@@ -1,7 +1,8 @@
 import { Github, Linkedin, Link } from "lucide-react";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { NavLink } from "react-router";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
+import { getToken } from "@/lib/getSetLocalStorage";
 
 function Header() {
 	const links = [
@@ -41,11 +42,17 @@ function Header() {
 						<span className="sr-only">{link.site}</span>
 					</a>
 				))}
-				{login.map(({ text, to }) => (
-					<NavLink key={text} to={to} className="">
-						<Button variant="ghost">{text}</Button>
+				{getToken() ? (
+					<NavLink to="/urls">
+						<Button variant="ghost">Ver todas las URLS</Button>
 					</NavLink>
-				))}
+				) : (
+					login.map(({ text, to }) => (
+						<NavLink key={text} to={to}>
+							<Button variant="ghost">{text}</Button>
+						</NavLink>
+					))
+				)}
 				<ModeToggle />
 			</div>
 		</header>

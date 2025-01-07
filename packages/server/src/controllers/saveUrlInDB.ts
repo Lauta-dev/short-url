@@ -4,11 +4,8 @@ import { Request, Response } from "express";
 
 export async function saveUrlInDB(req: Request, res: Response) {
 	const body: { url: string; expiresDate: string; intentos: string } = req.body;
-	const { url, expiresDate } = body;
+	const { url } = body;
 	const { hostname } = req;
-	let intentos = Number(body.intentos);
-	let statusCode = 200;
-
 	// Obtener el token del header
 	let token = req.header("Authorization")?.split("Bearer")[1].trim() || "";
 
@@ -42,8 +39,6 @@ export async function saveUrlInDB(req: Request, res: Response) {
 	const short = await PushUrls({
 		url,
 		hostname,
-		expiredDate: new Date().toUTCString(),
-		intentos,
 		token,
 	});
 
@@ -51,6 +46,6 @@ export async function saveUrlInDB(req: Request, res: Response) {
 		res,
 		code: 200,
 		message: "Url generada",
-		anyData: {},
+		anyData: { short },
 	});
 }

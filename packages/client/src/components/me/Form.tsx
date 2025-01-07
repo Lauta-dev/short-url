@@ -5,11 +5,10 @@ import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
 import UrlContain from "./UrlContain";
 import { apiUrl } from "@/const";
-import genDate from "@/lib/genDate";
 import { Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
-//import { IntentosControl } from "@/components/me/IntentosControl";
-import Options from "./Options";
+import { Label } from "@radix-ui/react-dropdown-menu";
+import { getToken } from "@/lib/getSetLocalStorage";
 
 function FormEstructure({
 	setData,
@@ -18,51 +17,29 @@ function FormEstructure({
 }) {
 	const [inputText, setInputText] = useState<string>("");
 	const [loading, setLoading] = useState<boolean>(false);
-	const [intentos, setIntentos] = useState<number>(0);
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 
 		const formData = new FormData(event.target as HTMLFormElement);
 		const data = Object.fromEntries(formData);
-		let hours = data.hours;
-		let minutes = data.minutes;
 		let url = data.url;
-		let intentos = Number(data.intentos as string);
-
-		// Para que no se genere un error
-		if (intentos === 0 || intentos === undefined) {
-			intentos = 100;
-		}
-
-		if (!hours) {
-			hours = (new Date().getHours() + 5).toString();
-		}
-		if (!minutes) {
-			minutes = new Date().getMinutes().toString();
-		}
-		console.log({ hours, minutes, url, intentos });
-
-		const date = genDate({
-			minutes: Number(minutes),
-			hours: Number(hours),
-		});
 
 		const body = JSON.stringify({
 			url,
-			expiresDate: date,
-			intentos,
 		});
 
 		setLoading(true);
 
 		try {
+			const token = getToken();
 			const res = await fetch(apiUrl, {
 				method: "POST",
 				body,
 				headers: {
 					Accept: "application/json",
 					"Content-Type": "application/json",
+					Authorization: "Bearer " + token,
 				},
 			});
 
@@ -97,10 +74,12 @@ function FormEstructure({
 			className="space-y-4 rounded-lg border bg-card p-6"
 		>
 			<div className="space-y-2">
+				<Label>Escriba su URL</Label>
 				<Input
 					type="url"
-					placeholder="De su URL"
+					placeholder="https://example.com/"
 					name="url"
+					id="url"
 					onChange={handleChange}
 					autoComplete="off"
 					autoFocus={true}
@@ -115,13 +94,6 @@ function FormEstructure({
 			>
 				{loading ? <Loader className={cn("animate-spin")} /> : "Enviar"}
 			</Button>
-
-			<Options
-				loading={loading}
-				setIntentos={setIntentos}
-				inputText={inputText}
-				intentos={intentos}
-			/>
 		</form>
 	);
 }
