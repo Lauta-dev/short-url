@@ -8,6 +8,7 @@ import Unauthorized from "./Unauthorized";
 import ErrorDisplay from "./error-display";
 import { SpinLoader } from "./Loader";
 import NoSavedURLs from "./no-saved-urls";
+import { apiUrl } from "@/const";
 
 interface Url {
 	id: string;
@@ -37,7 +38,7 @@ export default function UrlManager() {
 
 				const token = getToken();
 
-				const f = await fetch("http://localhost:3001/api/user/getUrls", {
+				const f = await fetch(apiUrl + "/api/user/getUrls", {
 					headers: {
 						Authorization: "Bearer " + token,
 					},
@@ -88,7 +89,7 @@ export default function UrlManager() {
 					newState: state ? 0 : 1,
 				});
 
-				const f = await fetch("http://localhost:3001/api/user/update", {
+				const f = await fetch(apiUrl + "/api/user/update", {
 					headers: {
 						"Content-Type": "application/json",
 						Authorization: "Bearer " + token,
