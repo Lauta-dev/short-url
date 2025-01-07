@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { limiter } from "./config/rateLimit";
+//import { limiter } from "./config/rateLimit";
 import router from "./src/routers/getLongUrl";
 import { router as postUrlInBb } from "./src/routers/PostUrlInDb";
 import { router as getUserUrls } from "./src/routers/getUserUrls";
@@ -24,7 +24,7 @@ app.options("*", cors());
 
 // - Middleware
 app.use(cors());
-app.use(limiter);
+//app.use(limiter);
 app.use(authMessage);
 
 // - routers

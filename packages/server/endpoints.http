@@ -1,6 +1,6 @@
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI1OGI4MWY5LTE4ZDAtNDNjMS1iMDJjLWI2YjdjYTBkNzkxMyIsImlhdCI6MTczNjIwOTcyOSwiZXhwIjoxNzM2MjEzMzI5fQ.Wepy4bX8xSil4KnWbPpRcyrSc4EBb8yZ3ee4P-TUJwA
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhhZTY2ZmE3LTc3ZmMtNGExZS05OTA4LTBkMTc2Y2QxMGU2YyIsImlhdCI6MTczNjIxMTk5MiwiZXhwIjoxNzM2MjE1NTkyfQ.gLPvG7gtqFaiwuMfdRr9d1b5cEDrKc-Y5AuBVNqLItI
 
-@app=localhost:3001
+@app=https://short-url-server.vercel.app
 
 ###
 
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 
-GET {{app}}/api/user/getUrls
+GET {{app}}
 Authorization: Bearer {{token}}
 
 ###

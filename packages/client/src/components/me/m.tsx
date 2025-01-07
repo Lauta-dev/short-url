@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ClipboardCopy } from "lucide-react";
+import { ClipboardCopy, Trash } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -30,6 +30,9 @@ export default function UrlManager() {
 	const [unauthorized, setUnauthorized] = useState(false);
 	const [updateElement, setUpdateElement] = useState(false);
 	const [notUrls, setNotUrls] = useState(false);
+
+	// Su unica utilidad es ejecutar el useEffect para volver a cargar elementos al eliminar una url
+	const [c, setC] = useState(false);
 
 	useEffect(() => {
 		async function getUrls() {
@@ -64,7 +67,7 @@ export default function UrlManager() {
 		}
 
 		getUrls();
-	}, []);
+	}, [c]);
 
 	const handleCopy = async (url: string) => {
 		try {
@@ -74,6 +77,32 @@ export default function UrlManager() {
 			toast.error("Fallo al copiar la URL, intente de nuevo");
 		}
 	};
+
+	async function handleDelete(id: string) {
+		try {
+			const token = getToken();
+			const body = JSON.stringify({
+				urlId: id,
+			});
+
+			await fetch(apiUrl + "/user/delete", {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: "Bearer " + token,
+				},
+				body,
+			});
+
+			setUpdateElement(true);
+			toast.success("Se elimino la url");
+			setC((c) => !c);
+		} catch (error) {
+			toast.error("Error al eliminar la URL");
+		} finally {
+			setUpdateElement(false);
+		}
+	}
 
 	async function handleToggle(url: Url) {
 		const { isActive, id, shortUrl } = url;
@@ -145,10 +174,20 @@ export default function UrlManager() {
 								size="icon"
 								className="h-8 w-8"
 								onClick={() => handleCopy(url.shortUrl)}
-								disabled={updateElement}
+								disabled={updateElement || !url.isActive}
 							>
 								<ClipboardCopy className="h-4 w-4" />
 								<span className="sr-only">Copy URL</span>
+							</Button>
+							<Button
+								variant="ghost"
+								size="icon"
+								className="h-8 w-8"
+								onClick={() => handleDelete(url.id)}
+								disabled={updateElement || !url.isActive}
+							>
+								<Trash color="red" className="h-4 w-4" />
+								<span className="sr-only">Eliminar URLC</span>
 							</Button>
 						</div>
 						<div className="text-sm text-muted-foreground">{url.url}</div>
