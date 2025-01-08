@@ -12,9 +12,10 @@ Short URL es un acortador de enlaces simple y eficiente, construido con JavaScri
 
 ## Tecnologías utilizadas
 
-- **JavaScript**
+- **JavaScript**/**TypeScrupt**
 - **CSS**
 - **HTML**
+- **React**
 - **Vercel** para el despliegue
 - **Turso.tech** para el uso de la base de datos
 - **SQLite**
@@ -28,30 +29,34 @@ git clone https://github.com/lauta-dev/short-url.git
 
 2. Instalar depenencias
 ```bash
-cd packages/server
-pnpm i
+pnpm install
 ```
 
 3. Iniciar proyectos
-> Para levantar un servidor web uso [live-server](https://www.npmjs.com/package/live-server)
-
 ```bash
-cd packages/client
-live-server
+pnpm run dev
 ```
-> Levanta en: http://localhost:8080
 
-```bash
-cd packages/server
-pnpm start dev
+## Diagrama de la base de datos
+
+```mermaid
+erDiagram
+    users {
+        TEXT id PK "NOT NULL UNIQUE"
+        TEXT name "NOT NULL UNIQUE"
+        TEXT password "NOT NULL"
+        TEXT salt "NOT NULL"
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+    urls {
+        TEXT id PK "NOT NULL UNIQUE"
+        TEXT original_url "NOT NULL"
+        TEXT short_url "NOT NULL"
+        INTEGER is_active "NOT NULL DEFAULT '1'"
+        TEXT user_id FK
+        TIMESTAMP created_at "DEFAULT CURRENT_TIMESTAMP"
+    }
+    users ||--o{ urls : "user_id"
 ```
-> Levanta en: http://localhost:3000
 
-## Métodos
-- `POST /api/shorten`:
-Crea una URL corta a partir de una URL larga. Recibe un cuerpo JSON con la propiedad url.
-Retorna un objeto con la URL corta generada y otros metadatos.
-
-- `GET /:id`:
-Redirige a la URL original asociada con el identificador corto (id).
-Si no encuentra la URL, retorna un error 404.
+## [Métodos HTTP](./packages/server/endpoints.http)
