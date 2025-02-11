@@ -28,6 +28,7 @@ function useAuthSubmit(apiEndpoint: string) {
 					"Content-Type": "application/json",
 				},
 				body,
+				credentials: "include",
 			});
 
 			const result = await response.json();

@@ -1,10 +1,11 @@
 import { registerUser } from "@/db/registerUser";
-import { accessToken } from "@utils/genAccessToken";
 import { triggerResponse } from "@utils/triggerResponse";
 import { Request, Response } from "express";
+import { Token } from "../../utils/token";
 
 export async function register(req: Request, res: Response) {
 	const { username, password } = req.body;
+	const t = new Token(res, req);
 
 	if (!username) {
 		triggerResponse({
@@ -26,16 +27,15 @@ export async function register(req: Request, res: Response) {
 		const data = await registerUser({ username, password });
 
 		// Genera el token si el registro es correcto
-		let token = "";
 		if (data.statusCode === 200) {
-			token = accessToken({ id: data.id });
+			t.setToken(data.id as string);
 		}
+
 		triggerResponse({
 			res,
 			code: data.statusCode,
 			anyData: {
 				...data,
-				token: token,
 			},
 		});
 	} catch (error) {

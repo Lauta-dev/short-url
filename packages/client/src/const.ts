@@ -18,6 +18,7 @@ const minutes = Array.from({ length: 60 }, (_, i) =>
 const apiUrl = prefix + path;
 const registerUserApi = prefix + "/register";
 const loginUserApi = prefix + "/login";
+const testJwtApi = prefix + "/verify-jwt";
 const time = { hours, minutes };
 
-export { apiUrl, registerUserApi, loginUserApi, time };
+export { apiUrl, registerUserApi, loginUserApi, time, testJwtApi };

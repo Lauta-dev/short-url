@@ -10,6 +10,9 @@ import { strategy } from "./config/passport";
 import passport from "passport";
 import { user } from "./src/routers/user";
 import { authMessage } from "./src/middleware/authMessage";
+import cookieParser from "cookie-parser";
+import { corsOptions } from "./config/cors";
+import { verifyJwt } from "./src/routers/verifyJwt";
 
 passport.use("jwt", strategy);
 
@@ -20,18 +23,19 @@ const port = 3001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
-app.options("*", cors());
 
 // - Middleware
-app.use(cors());
+app.use(cookieParser());
+app.use(cors(corsOptions));
 //app.use(limiter);
 app.use(authMessage);
 
 // - routers
 app.use(router);
-app.use(postUrlInBb);
+app.use(verifyJwt);
 
 // - routers (crud)
+app.use(postUrlInBb);
 app.use(getUserUrls);
 app.use(deleteUserUrl);
 app.use(updateResource);

@@ -8,7 +8,6 @@ import { apiUrl } from "@/const";
 import { Loader } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Label } from "@radix-ui/react-dropdown-menu";
-import { getToken } from "@/lib/getSetLocalStorage";
 
 function FormEstructure({
 	setData,
@@ -32,15 +31,15 @@ function FormEstructure({
 		setLoading(true);
 
 		try {
-			const token = getToken();
 			const res = await fetch(apiUrl + "/url", {
 				method: "POST",
 				body,
 				headers: {
 					Accept: "application/json",
 					"Content-Type": "application/json",
-					Authorization: "Bearer " + token,
 				},
+
+				credentials: "include",
 			});
 
 			if (!res.ok) {
