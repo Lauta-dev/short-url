@@ -26,6 +26,8 @@ export async function register(req: Request, res: Response) {
 	try {
 		const data = await registerUser({ username, password });
 
+		console.log(data);
+
 		// Genera el token si el registro es correcto
 		if (data.statusCode === 200) {
 			t.setToken(data.id as string);

@@ -2,6 +2,7 @@ import passport from "passport";
 
 // Middleware personalizado
 const authenticateJWT = (req, res, next) => {
+	console.log({ tok: req.cookies });
 	passport.authenticate("jwt", { session: false }, (err, user, info) => {
 		if (err) return next(err); // Maneja errores de Passport
 		if (!user) return res.status(401).json({ message: "Acceso no autorizado" }); // Sin usuario

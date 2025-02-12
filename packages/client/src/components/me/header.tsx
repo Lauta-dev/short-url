@@ -59,6 +59,7 @@ function Header() {
 					permission: boolean;
 					error: string;
 				};
+				console.log(json);
 
 				setPermissions(json.permission);
 			} catch (error) {

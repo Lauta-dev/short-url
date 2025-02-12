@@ -19,6 +19,8 @@ async function PushUrls({ url, hostname, token }: Client) {
 		const pay = getInfoFromToken(token);
 		const user = await getUserById(pay?.id);
 
+		console.log({ pay, user });
+
 		if (user?.exist) {
 			userId = user.id;
 		}

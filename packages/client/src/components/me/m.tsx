@@ -3,7 +3,6 @@ import { ClipboardCopy, Trash } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { getToken } from "@/lib/getSetLocalStorage";
 import Unauthorized from "./Unauthorized";
 import ErrorDisplay from "./error-display";
 import { SpinLoader } from "./Loader";
@@ -39,12 +38,8 @@ export default function UrlManager() {
 			try {
 				setLoading(true);
 
-				const token = getToken();
-
 				const f = await fetch(apiUrl + "/user/getUrls", {
-					headers: {
-						Authorization: "Bearer " + token,
-					},
+					credentials: "include",
 				});
 
 				if (f.status === 404) {
@@ -80,7 +75,6 @@ export default function UrlManager() {
 
 	async function handleDelete(id: string) {
 		try {
-			const token = getToken();
 			const body = JSON.stringify({
 				urlId: id,
 			});
@@ -89,8 +83,8 @@ export default function UrlManager() {
 				method: "DELETE",
 				headers: {
 					"Content-Type": "application/json",
-					Authorization: "Bearer " + token,
 				},
+				credentials: "include",
 				body,
 			});
 
@@ -109,8 +103,6 @@ export default function UrlManager() {
 
 		try {
 			async function updateInDb(state: boolean) {
-				const token = getToken();
-
 				setUpdateElement(true);
 
 				const body = JSON.stringify({
@@ -121,8 +113,8 @@ export default function UrlManager() {
 				const f = await fetch(apiUrl + "/user/update", {
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + token,
 					},
+					credentials: "include",
 					method: "PUT",
 					body,
 				});

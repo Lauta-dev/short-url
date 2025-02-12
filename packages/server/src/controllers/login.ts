@@ -3,6 +3,7 @@ import { accessToken } from "@utils/genAccessToken";
 import { triggerResponse } from "@utils/triggerResponse";
 import { comparePw } from "@utils/hashPw";
 import { getUserByUsername } from "@/db/getUserByUsername";
+import { Token } from "@utils/token";
 
 interface PersonModel {
 	username: string | undefined;
@@ -11,6 +12,8 @@ interface PersonModel {
 
 export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 	const { username, password } = req.body;
+
+	const t = new Token(res, req);
 
 	if (!username) {
 		triggerResponse({
@@ -50,9 +53,7 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 		return;
 	}
 
-	const token = accessToken({
-		id: data.id,
-	});
+	t.setToken(data.id as string);
 
 	const compare = comparePw(password, data.password as string);
 
@@ -70,8 +71,5 @@ export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
 		res,
 		message: "Login",
 		code: 200,
-		anyData: {
-			token,
-		},
 	});
 }

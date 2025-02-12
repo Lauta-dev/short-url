@@ -1,13 +1,21 @@
+import { Request } from "express";
 import passportJWT from "passport-jwt";
 // Configuración de Passport con JWT
 const JwtStrategy = passportJWT.Strategy;
-const ExtractJwt = passportJWT.ExtractJwt;
 
 // Definir la estrategia JWT
 const strategy = new JwtStrategy(
 	{
-		jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-		secretOrKey: process.env.JWT_SECRET,
+		jwtFromRequest: (req: Request) => {
+			let token = "";
+
+			if (req && req.cookies) {
+				token = req.cookies.token;
+			}
+
+			return token;
+		},
+		secretOrKey: process.env.JWT_SECRET as string,
 	},
 	(jwtPayload, done) => {
 		const user = jwtPayload;
