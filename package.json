@@ -1,0 +1,24 @@
+{
+	"name": "short-url",
+	"version": "1.0.0",
+	"description": "Short URL es un acortador de enlaces simple y eficiente, construido con JavaScript y CSS. Permite acortar URLs largas para facilitar su uso y compartirlas",
+	"main": "",
+	"scripts": {
+		"server:dev": "pnpm --filter server dev",
+		"client:dev": "pnpm --filter client dev",
+		"dev": "pnpm client:dev & pnpm server:dev"
+	},
+	"keywords": [
+		"web",
+		"short-url",
+		"url-shortener",
+		"backend",
+		"typescript",
+		"biomejs",
+		"express",
+		"node",
+		"sqlite"
+	],
+	"author": "lauta-dev",
+	"license": "ISC"
+}
