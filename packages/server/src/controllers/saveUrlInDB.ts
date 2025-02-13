@@ -2,8 +2,16 @@ import PushUrls from "@/db/PushUrl";
 import { triggerResponse } from "@utils/triggerResponse";
 import { Request, Response } from "express";
 
-export async function saveUrlInDB(req: Request, res: Response) {
-	const body: { url: string; expiresDate: string; intentos: string } = req.body;
+interface BodyTypes {
+	url: string;
+	intentos: string;
+}
+
+export async function saveUrlInDB(
+	req: Request<{}, {}, BodyTypes, {}>,
+	res: Response,
+) {
+	const body = req.body;
 	const { url } = body;
 	const { hostname } = req;
 

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { accessToken } from "@utils/genAccessToken";
 import { triggerResponse } from "@utils/triggerResponse";
 import { comparePw } from "@utils/hashPw";
 import { getUserByUsername } from "@/db/getUserByUsername";
@@ -11,65 +10,74 @@ interface PersonModel {
 }
 
 export async function login(req: Request<{}, {}, PersonModel>, res: Response) {
-	const { username, password } = req.body;
+	try {
+		const { username, password } = req.body;
 
-	const t = new Token(res, req);
+		const t = new Token(res, req);
 
-	if (!username) {
+		if (!username) {
+			triggerResponse({
+				res,
+				message: "El nombre de usuario es requerido",
+				code: 400,
+			});
+			return;
+		}
+
+		if (!password) {
+			triggerResponse({
+				res,
+				message: "La contraseña es requerida",
+				code: 400,
+			});
+			return;
+		}
+
+		if (!username && !password) {
+			triggerResponse({
+				res,
+				message: "El nombre de usuario y contraseña son requeridos",
+				code: 400,
+			});
+			return;
+		}
+
+		const data = await getUserByUsername(username);
+
+		if (!data?.exist) {
+			triggerResponse({
+				res,
+				message: "Usuario no encontrado",
+				code: 404,
+			});
+			return;
+		}
+
+		t.setToken(data.id as string);
+
+		const compare = comparePw(password, data.password as string);
+
+		if (!compare) {
+			triggerResponse({
+				res,
+				message: "Contraseña invalida",
+				code: 404,
+			});
+
+			return;
+		}
+
 		triggerResponse({
 			res,
-			message: "El nombre de usuario es requerido",
-			code: 400,
+			message: "Login",
+			code: 200,
 		});
-		return;
-	}
-
-	if (!password) {
+	} catch (error) {
+		const err = error as Error;
 		triggerResponse({
 			res,
-			message: "La contraseña es requerida",
-			code: 400,
+			message: "Error: " + err.message,
+			code: 500,
 		});
-		return;
 	}
-
-	if (!username && !password) {
-		triggerResponse({
-			res,
-			message: "El nombre de usuario y contraseña son requeridos",
-			code: 400,
-		});
-		return;
-	}
-
-	const data = await getUserByUsername(username);
-
-	if (!data?.exist) {
-		triggerResponse({
-			res,
-			message: "Usuario no encontrado",
-			code: 404,
-		});
-		return;
-	}
-
-	t.setToken(data.id as string);
-
-	const compare = comparePw(password, data.password as string);
-
-	if (!compare) {
-		triggerResponse({
-			res,
-			message: "Contraseña invalida",
-			code: 404,
-		});
-
-		return;
-	}
-
-	triggerResponse({
-		res,
-		message: "Login",
-		code: 200,
-	});
 }

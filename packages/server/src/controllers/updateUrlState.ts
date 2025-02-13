@@ -2,13 +2,13 @@ import { updateUrlState as updateState } from "@/db/updateUrlState";
 import { triggerResponse } from "@utils/triggerResponse";
 import { Request, Response } from "express";
 
-interface NewState {
+interface State {
 	id: string;
 	newState: number;
 }
 
 export async function updateUrlState(
-	req: Request<{}, {}, NewState>,
+	req: Request<{}, {}, State>,
 	res: Response,
 ) {
 	try {
