@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
-//import { limiter } from "./config/rateLimit";
-import router from "./src/routers/getLongUrl";
+import { limiter } from "./config/rateLimit";
+import { getLongUrl } from "./src/routers/getLongUrl";
 import { router as postUrlInBb } from "./src/routers/PostUrlInDb";
 import { router as getUserUrls } from "./src/routers/getUserUrls";
 import { router as deleteUserUrl } from "./src/routers/deleteUserUrl";
@@ -27,11 +27,11 @@ app.use(passport.initialize());
 // - Middleware
 app.use(cookieParser());
 app.use(cors(corsOptions));
-//app.use(limiter);
+app.use(limiter);
 app.use(authMessage);
 
 // - routers
-app.use(router);
+app.use(getLongUrl);
 app.use(verifyJwt);
 
 // - routers (crud)
