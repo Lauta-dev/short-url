@@ -26,7 +26,7 @@ app.use(passport.initialize());
 
 // - Middleware
 app.use(cookieParser());
-//app.use(cors(corsOptions));
+app.use(cors());
 app.use(limiter);
 app.use(authMessage);
 
